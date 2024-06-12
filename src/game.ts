@@ -14,6 +14,7 @@ const spriteRenderer = new SpriteRenderer('assets/images/phaser-logo.png');
 export class Game {
     private _playerScore : number;
     private _gameState : GameState;
+    private _highScore : number;
     renderer = new Renderer(canvas);
     input: Input;
     gameObjects: GameObject[];
@@ -26,6 +27,7 @@ export class Game {
         this.gameObjects = [];
         this.lastFrameTime = 0;
         this._playerScore = 0;
+        this._highScore = 0;
     }
     start(currentTime: number) {
         this.renderer.clear();
@@ -78,6 +80,10 @@ export class Game {
         if (this._gameState === GameState.PLAYING)
         {
             this._playerScore +=  deltaTime/2;   
+            if(this._playerScore > this._highScore)
+            {
+                this._highScore = this._playerScore;
+            }
         }
         console.log('Score: ' + this._playerScore);
     }
@@ -125,6 +131,7 @@ export class Game {
             return;
         }
         ctx.fillText('Your Score: ' + Math.floor(this._playerScore), window.innerWidth/2, 50);
+        ctx.fillText('High Score: ' + Math.floor(this._highScore), window.innerWidth/2, 100);
         ctx.fillText('PRESS ENTER TO PLAY AGAIN!', window.innerWidth/2, window.innerHeight/2);
         if(this.input.isKeyPressed('Enter') && this._gameState === GameState.GAMEOVER)
         {
