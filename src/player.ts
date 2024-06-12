@@ -29,13 +29,13 @@ export class Player extends GameObject {
         this._animator.addSprite(new SpriteRenderer('assets/images/seiba_walking_3.png'));
     }
     update(deltaTime : number, input : Input) {
-        if (input.isKeyPressed('KeyW') && this._isOnGround) {
+        if ((input.isKeyPressed('KeyW') || input.isKeyPressed('Space'))&& this._isOnGround) {
             this._isOnGround = false;
             this._isJumping = true;
         }
         if (!this._isOnGround) {
             if (this.position[1] > window.innerHeight - this._height - 400 && this._isJumping) {
-                this.position[1] -= 1500 * deltaTime;
+                this.position[1] -= 2000 * deltaTime;
                 if (this.position[1] < window.innerHeight - this._height - 400) {
                     this._isJumping = false;
                 }
