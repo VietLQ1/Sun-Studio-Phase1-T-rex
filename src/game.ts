@@ -6,23 +6,53 @@ import { Player } from './player';
 import { Cactus } from './cactus';
 import { Bird } from './bird';
 
+enum GameState {'READY', 'PLAYING', 'GAMEOVER'};
+
 const canvas = document.createElement('canvas') as HTMLCanvasElement;
 document.body.appendChild(canvas);
 const spriteRenderer = new SpriteRenderer('assets/images/phaser-logo.png');
-export  class Game {
+export class Game {
+    private _playerScore : number;
+    private _gameState : GameState;
     renderer = new Renderer(canvas);
     input: Input;
     gameObjects: GameObject[];
     lastFrameTime: number;
     constructor() {
+        this._gameState = GameState.READY;
         console.log('Game created')
         this.renderer = new Renderer(canvas);
         this.input = new Input();
         this.gameObjects = [];
         this.lastFrameTime = 0;
+        this._playerScore = 0;
     }
     start() {
-        requestAnimationFrame((timestamp) => this.gameLoop(timestamp));
+        this.renderer.clear();
+        var ctx = canvas.getContext('2d');
+        if(!ctx)
+        {
+            console.log('Failed to get 2d context');
+            return;
+        }
+        ctx.font = 'bold 50px Arial';
+        ctx.textAlign = 'center';
+        ctx.textBaseline = 'middle';
+        ctx.fillStyle = 'black';
+        ctx.fillText('PRESS ENTER TO START!', window.innerWidth/2, window.innerHeight/2);
+        if(this.input.isKeyPressed('Enter') && this._gameState === GameState.READY)
+        {
+            this._gameState = GameState.PLAYING;
+            let player = new Player();
+            game.addGameObject(player);
+            let cactus = new Cactus();
+            game.addGameObject(cactus);
+            let bird = new Bird();
+            game.addGameObject(bird);
+            requestAnimationFrame((timestamp) => this.gameLoop(timestamp));
+        }
+        else
+            requestAnimationFrame((timestamp) => this.start());
     }
     addGameObject(gameObject: GameObject) {
         this.gameObjects.push(gameObject);
@@ -35,16 +65,21 @@ export  class Game {
         this.checkCollisions();
         this.render();
         //spriteRenderer.render(0, 200, 100, 100);
-        requestAnimationFrame((timestamp) => this.gameLoop(timestamp));
+        if(this._gameState === GameState.PLAYING)
+            requestAnimationFrame((timestamp) => this.gameLoop(timestamp));
+        else if(this._gameState === GameState.GAMEOVER)
+            console.log('Game Over');
     }
     update(deltaTime: number) {
         this.gameObjects.forEach(obj => obj.update(deltaTime, this.input));
+        this._playerScore +=  deltaTime/2;
     }
 
     render() {
         this.renderer.clear();
         //spriteRenderer.render(canvas.width-100, canvas.height-100, 100, 100);
         this.gameObjects.forEach(obj => obj.render());
+        canvas.getContext('2d')?.fillText('Score: ' + Math.floor(this._playerScore), window.innerWidth/2, 50);
     }
     checkCollisions() {
         //console.log('Checking collisions');
@@ -68,17 +103,13 @@ export  class Game {
         if(obj1.tag === 'player' || obj2.tag === 'player')
         {
             console.log('Player collided with obstacle');
+            this._gameState = GameState.GAMEOVER;
+            this.renderer.clear();
         }
     }
 }
 
 let game = new Game()
 game.start();
-let player = new Player();
-game.addGameObject(player);
-let cactus = new Cactus();
-game.addGameObject(cactus);
-let bird = new Bird();
-game.addGameObject(bird);
 
 
