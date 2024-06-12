@@ -13,7 +13,8 @@ export class Player extends GameObject {
     private _width = 160;
     private _height = 200;
     private _isOnGround = true;
-    private _isJumping = false;
+    //private _isJumping = false;
+    private _jumpForce = 1500;
     constructor() {
         super();
         this._tag = 'player';
@@ -31,17 +32,14 @@ export class Player extends GameObject {
     update(deltaTime : number, input : Input) {
         if ((input.isKeyPressed('KeyW') || input.isKeyPressed('Space'))&& this._isOnGround) {
             this._isOnGround = false;
-            this._isJumping = true;
+            this._jumpForce = 1500;
+            //this._isJumping = true;
         }
         if (!this._isOnGround) {
-            if (this.position[1] > window.innerHeight - this._height - 400 && this._isJumping) {
-                this.position[1] -= 1500 * deltaTime;
-                if (this.position[1] < window.innerHeight - this._height - 400) {
-                    this._isJumping = false;
-                }
-            }
-            this.position[1] += 98 * 5 * deltaTime;
-            if (this.position[1] > window.innerHeight - this._height) {
+                this.position[1] -= this._jumpForce * deltaTime;
+                this._jumpForce -= 3000 * deltaTime;
+
+            if (this.position[1] >= window.innerHeight - this._height) {
                 this.position[1] = window.innerHeight - this._height;
                 this._isOnGround = true;
             }
