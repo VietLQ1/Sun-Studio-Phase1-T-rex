@@ -115,9 +115,9 @@ export class Game {
         }
     }
     gameOver(currentTime: number) {
-        this.gameObjects = [];
         this._gameState = GameState.GAMEOVER;
         this.renderer.clear();
+        this.gameObjects[0].render();
         var ctx = canvas.getContext('2d');
         if(!ctx)
         {
@@ -128,6 +128,7 @@ export class Game {
         ctx.fillText('PRESS ENTER TO PLAY AGAIN!', window.innerWidth/2, window.innerHeight/2);
         if(this.input.isKeyPressed('Enter') && this._gameState === GameState.GAMEOVER)
         {
+            this.gameObjects = [];
             let player = new Player();
             game.addGameObject(player);
             let cactus = new Cactus();
