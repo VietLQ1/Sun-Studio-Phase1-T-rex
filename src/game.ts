@@ -27,7 +27,7 @@ export class Game {
         this.lastFrameTime = 0;
         this._playerScore = 0;
     }
-    start() {
+    start(currentTime: number) {
         this.renderer.clear();
         var ctx = canvas.getContext('2d');
         if(!ctx)
@@ -51,9 +51,12 @@ export class Game {
             game.addGameObject(bird);
             requestAnimationFrame((timestamp) => this.gameLoop(timestamp));
         }
-        else
-            requestAnimationFrame((timestamp) => this.start());
-    }
+        else if (this._gameState === GameState.READY)
+        {
+            this.lastFrameTime = currentTime;
+            requestAnimationFrame((timestamp) => this.start(timestamp));
+        }
+        }
     addGameObject(gameObject: GameObject) {
         this.gameObjects.push(gameObject);
     }
@@ -72,7 +75,11 @@ export class Game {
     }
     update(deltaTime: number) {
         this.gameObjects.forEach(obj => obj.update(deltaTime, this.input));
-        this._playerScore +=  deltaTime/2;
+        if (this._gameState === GameState.PLAYING)
+        {
+            this._playerScore +=  deltaTime/2;   
+        }
+        console.log('Score: ' + this._playerScore);
     }
 
     render() {
@@ -103,13 +110,43 @@ export class Game {
         if(obj1.tag === 'player' || obj2.tag === 'player')
         {
             console.log('Player collided with obstacle');
-            this._gameState = GameState.GAMEOVER;
             this.renderer.clear();
+            this.gameOver(this.lastFrameTime);
+        }
+    }
+    gameOver(currentTime: number) {
+        this.gameObjects = [];
+        this._gameState = GameState.GAMEOVER;
+        this.renderer.clear();
+        var ctx = canvas.getContext('2d');
+        if(!ctx)
+        {
+            console.log('Failed to get 2d context');
+            return;
+        }
+        ctx.fillText('Your Score: ' + Math.floor(this._playerScore), window.innerWidth/2, 50);
+        ctx.fillText('PRESS ENTER TO PLAY AGAIN!', window.innerWidth/2, window.innerHeight/2);
+        if(this.input.isKeyPressed('Enter') && this._gameState === GameState.GAMEOVER)
+        {
+            let player = new Player();
+            game.addGameObject(player);
+            let cactus = new Cactus();
+            game.addGameObject(cactus);
+            let bird = new Bird();
+            game.addGameObject(bird);
+            this._playerScore = 0;
+            this._gameState = GameState.PLAYING;
+            requestAnimationFrame((timestamp) => this.gameLoop(timestamp));
+        }
+        else
+        {
+            this.lastFrameTime = currentTime;
+            requestAnimationFrame((timestamp) => this.gameOver(timestamp));
         }
     }
 }
 
 let game = new Game()
-game.start();
+game.start(0);
 
 

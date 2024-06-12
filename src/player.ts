@@ -35,7 +35,7 @@ export class Player extends GameObject {
         }
         if (!this._isOnGround) {
             if (this.position[1] > window.innerHeight - this._height - 400 && this._isJumping) {
-                this.position[1] -= 2000 * deltaTime;
+                this.position[1] -= 1500 * deltaTime;
                 if (this.position[1] < window.innerHeight - this._height - 400) {
                     this._isJumping = false;
                 }
