@@ -4,6 +4,7 @@ import { GameObject } from './gameObject';
 import { Renderer } from './renderer';
 import { Player } from './player';
 import { Cactus } from './cactus';
+import { Bird } from './bird';
 
 const canvas = document.createElement('canvas') as HTMLCanvasElement;
 document.body.appendChild(canvas);
@@ -77,6 +78,7 @@ let player = new Player();
 game.addGameObject(player);
 let cactus = new Cactus();
 game.addGameObject(cactus);
-let cactus2 = new Cactus();
+let bird = new Bird();
+game.addGameObject(bird);
 
 

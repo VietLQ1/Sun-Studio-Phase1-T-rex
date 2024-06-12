@@ -8,7 +8,8 @@ export class Cactus extends Obstacle
         super();
         this._width = 60;
         this._height = 200;
-        this._speed = 5000;
+        this._speed = 8000;
+        this._spawnInterval = 1;
         this.position[1] = window.innerHeight - this._height;
         this.collider = new Collider(this.position[0], this.position[1], this._width, this._height);
         this.spriteRenderer = new SpriteRenderer('assets/images/cactus.png');

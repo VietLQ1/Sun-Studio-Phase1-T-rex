@@ -14,7 +14,7 @@ export class NormalState implements State {
                 this._currentSprite = 0;
             }
         }
-        console.log(this._currentSprite);
+        //console.log(this._currentSprite);
     }
     render(x: number, y: number, width: number, height: number) {
         this._sprites[this._currentSprite].render(x, y, width, height);

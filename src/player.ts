@@ -40,7 +40,7 @@ export class Player extends GameObject {
                     this._isJumping = false;
                 }
             }
-            this.position[1] += 98 * 4 * deltaTime;
+            this.position[1] += 98 * 5 * deltaTime;
             if (this.position[1] > window.innerHeight - this._height) {
                 this.position[1] = window.innerHeight - this._height;
                 this._isOnGround = true;
@@ -65,7 +65,7 @@ export class Player extends GameObject {
         this.collider.y = this.position[1];
         this.collider.height = this._height;
         this._animator.update(deltaTime);
-        console.log(this.collider.x, this.collider.y, this.collider.width, this.collider.height);
+        //console.log(this.collider.x, this.collider.y, this.collider.width, this.collider.height);
     }
     render() {
         this._animator.render(this.position[0], this.position[1], this._width, this._height);
