@@ -17,4 +17,10 @@ export class AudioClip {
     public changeVolume(volume: number) {
         this._audio.volume = volume;
     }
+    public mute() {
+        this._audio.muted = true;
+    }
+    public unmute() {
+        this._audio.muted = false;
+    }
 }

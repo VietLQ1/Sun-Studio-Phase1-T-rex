@@ -11,6 +11,7 @@ enum GameState {'READY', 'PLAYING', 'GAMEOVER'};
 
 //const settingsBtn = document.createElement('button') as HTMLButtonElement;
 const canvas = document.createElement('canvas') as HTMLCanvasElement;
+const windowInput = new Input();
 //settingsBtn.innerText = 'Settings';
 //document.body.appendChild(settingsBtn);
 document.body.appendChild(canvas);
@@ -50,17 +51,17 @@ export class Game {
         ctx.textBaseline = 'middle';
         ctx.fillStyle = 'black';
         ctx.fillText('PRESS ENTER TO START!', window.innerWidth/2, window.innerHeight/2);
-        if(this.input.isKeyPressed('Enter') && this._gameState === GameState.READY)
+        if((this.input.isKeyPressed('Enter') || this.input.getTouchStart())&& this._gameState === GameState.READY)
         {
             this._playerScore = 0;
             this._audioManager.playAudioClip('bgm', true);
             this._gameState = GameState.PLAYING;
             let player = new Player();
-            game.addGameObject(player);
+            this.addGameObject(player);
             let cactus = new Cactus();
-            game.addGameObject(cactus);
+            this.addGameObject(cactus);
             let bird = new Bird();
-            game.addGameObject(bird);
+            this.addGameObject(bird);
             requestAnimationFrame((timestamp) => this.gameLoop(timestamp));
         }
         else if (this._gameState === GameState.READY)
@@ -162,11 +163,11 @@ export class Game {
         {
             this._gameObjects = [];
             let player = new Player();
-            game.addGameObject(player);
+            this.addGameObject(player);
             let cactus = new Cactus();
-            game.addGameObject(cactus);
+            this.addGameObject(cactus);
             let bird = new Bird();
-            game.addGameObject(bird);
+            this.addGameObject(bird);
             this._playerScore = 0;
             this._gameState = GameState.PLAYING;
             requestAnimationFrame((timestamp) => this.gameLoop(timestamp));
@@ -187,7 +188,10 @@ export class Game {
     }
 }
 
+
 let game = new Game()
 game.start(0);
+
+
 
 

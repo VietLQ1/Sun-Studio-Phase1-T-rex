@@ -4,7 +4,7 @@ export class AudioManager {
     private _audioClips: Map<string, AudioClip>;
     private _volume: number;
     private constructor() {
-        this._volume = 1;
+        this._volume = 0.5;
         this._audioClips = new Map();
     }
     static getInstance() {
@@ -39,4 +39,15 @@ export class AudioManager {
             clip.playLoop();
         }
     }
+    public mute() {
+        for (let clip of this._audioClips.values()) {
+            clip.mute();
+        }
+    }
+    public unmute() {
+        for (let clip of this._audioClips.values()) {
+            clip.unmute();
+        }
+    }
+
 }
