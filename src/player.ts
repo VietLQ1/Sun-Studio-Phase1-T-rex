@@ -11,11 +11,11 @@ export class Player extends GameObject {
 
     private _animator = new Animator();
     private _speed = 500;
-    private _width = 160;
-    private _height = 200;
+    private _width = 160 * window.innerHeight / 1080;
+    private _height = 200 * window.innerHeight / 1080;
     private _isOnGround = true;
     //private _isJumping = false;
-    private _jumpForce = 1500;
+    private _jumpForce = 1500 * window.innerHeight / 1080;
     constructor() {
         super();
         this._tag = 'player';
@@ -35,14 +35,14 @@ export class Player extends GameObject {
     public update(deltaTime : number, input : Input) {
         if ((input.isKeyPressed('KeyW') || input.isKeyPressed('Space') || input.getTouchStart())&& this._isOnGround) {
             this._isOnGround = false;
-            this._jumpForce = 1500;
+            this._jumpForce = 1500 * window.innerHeight / 1080;
             AudioManager.getInstance().getAudioClip('jump')?.play();
             input.clearTouch();
             //this._isJumping = true;
         }
         if (!this._isOnGround) {
                 this.position[1] -= this._jumpForce * deltaTime;
-                this._jumpForce -= 4900 * deltaTime;
+                this._jumpForce -= 4900 * (window.innerHeight / 1080) * deltaTime;
                 input.clearTouch();
 
             if (this.position[1] >= window.innerHeight - this._height) {
@@ -51,12 +51,12 @@ export class Player extends GameObject {
             }
         }
         if (input.isKeyPressed('KeyS') && this._isOnGround) {
-            this._height = 100;
+            this._height = 100 * window.innerHeight / 1080;
             this.position[1] = window.innerHeight - this._height;
         }
         else if (this._isOnGround) 
         {
-            this._height = 200;
+            this._height = 200 * window.innerHeight / 1080;
             this.position[1] = window.innerHeight - this._height;
         }
         // if (input.isKeyPressed('KeyA')) {

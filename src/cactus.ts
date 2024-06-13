@@ -6,8 +6,8 @@ export class Cactus extends Obstacle
 {
     constructor() {
         super();
-        this._width = 50;
-        this._height = 120;
+        this._width = 50 * window.innerHeight / 1080;
+        this._height = 120 * window.innerHeight / 1080;
         this._speed = 8000;
         this._spawnInterval = 2;
         this.position[1] = window.innerHeight - this._height;
@@ -15,7 +15,7 @@ export class Cactus extends Obstacle
         this.spriteRenderer = new SpriteRenderer('assets/images/cactus.png');
     }
     public render() {
-        this.spriteRenderer.render(this.position[0], this.position[1], 100, this._height);
+        this.spriteRenderer.render(this.position[0], this.position[1], 100 * window.innerHeight / 1080, this._height);
     }
     public onCollisionEnter(other: GameObject): void {
         

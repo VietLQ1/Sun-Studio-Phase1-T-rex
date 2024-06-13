@@ -10,8 +10,8 @@ export class Bird extends Obstacle
     private _animator : Animator;
     constructor() {
         super();
-        this._width = 60;
-        this._height = 60;
+        this._width = 60 * window.innerHeight / 1080;
+        this._height = 60 * window.innerHeight / 1080;
         this._speed = 10000;
         this._spawnInterval = 3.14159265 * 3;
         this.position[0] = this.position[0] + window.innerWidth + Math.random() * 3000 * this._spawnInterval;
