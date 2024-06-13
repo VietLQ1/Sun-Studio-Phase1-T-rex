@@ -9,7 +9,10 @@ import { AudioManager } from './audioManager';
 
 enum GameState {'READY', 'PLAYING', 'GAMEOVER'};
 
+//const settingsBtn = document.createElement('button') as HTMLButtonElement;
 const canvas = document.createElement('canvas') as HTMLCanvasElement;
+//settingsBtn.innerText = 'Settings';
+//document.body.appendChild(settingsBtn);
 document.body.appendChild(canvas);
 const spriteRenderer = new SpriteRenderer('assets/images/phaser-logo.png');
 export class Game {
@@ -29,7 +32,7 @@ export class Game {
         this._gameObjects = [];
         this.lastFrameTime = 0;
         this._playerScore = 0;
-        this._highScore = 0;
+        this._highScore = localStorage.getItem('highScore') ? parseInt(localStorage.getItem('highScore') as string) : 0;
         this._audioManager.addAudioClip('bgm', 'assets/audios/BGM.wav');
     }
     public start(currentTime: number) {
@@ -96,7 +99,16 @@ export class Game {
         this.renderer.clear();
         //spriteRenderer.render(canvas.width-100, canvas.height-100, 100, 100);
         this._gameObjects.forEach(obj => obj.render());
-        canvas.getContext('2d')?.fillText('Score: ' + Math.floor(this._playerScore), window.innerWidth/2, 50);
+        var ctx = canvas.getContext('2d');
+        if(!ctx)
+        {
+            console.log('Failed to get 2d context');
+            return;
+        }
+        ctx.font = 'bold 50px Arial';
+        ctx.textAlign = 'center';
+        ctx.textBaseline = 'middle';
+        ctx.fillText('Score: ' + Math.floor(this._playerScore), window.innerWidth/2, 50);
     }
     private checkCollisions() {
         //console.log('Checking collisions');
@@ -134,6 +146,10 @@ export class Game {
             console.log('Failed to get 2d context');
             return;
         }
+        localStorage.setItem('highScore', this._highScore.toString());
+        ctx.font = 'bold 50px Arial';
+        ctx.textAlign = 'center';
+        ctx.textBaseline = 'middle';
         ctx.fillText('Your Score: ' + Math.floor(this._playerScore), window.innerWidth/2, 50);
         ctx.fillText('High Score: ' + Math.floor(this._highScore), window.innerWidth/2, 100);
         ctx.fillText('PRESS ENTER TO PLAY AGAIN!', window.innerWidth/2, window.innerHeight/2);
