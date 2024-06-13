@@ -5,6 +5,7 @@ import { Renderer } from './renderer';
 import { Player } from './player';
 import { Cactus } from './cactus';
 import { Bird } from './bird';
+import { AudioClip } from './components/audioClip';
 
 enum GameState {'READY', 'PLAYING', 'GAMEOVER'};
 
@@ -44,6 +45,8 @@ export class Game {
         ctx.fillText('PRESS ENTER TO START!', window.innerWidth/2, window.innerHeight/2);
         if(this.input.isKeyPressed('Enter') && this._gameState === GameState.READY)
         {
+            let bgm = new AudioClip('assets/audios/BGM.wav');
+            bgm.playLoop();
             this._gameState = GameState.PLAYING;
             let player = new Player();
             game.addGameObject(player);
