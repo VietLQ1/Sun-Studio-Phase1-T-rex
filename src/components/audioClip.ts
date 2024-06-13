@@ -14,4 +14,7 @@ export class AudioClip {
     pause() {
         this._audio.pause();
     }
+    changeVolume(volume: number) {
+        this._audio.volume = volume;
+    }
 }

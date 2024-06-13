@@ -5,7 +5,7 @@ import { Renderer } from './renderer';
 import { Player } from './player';
 import { Cactus } from './cactus';
 import { Bird } from './bird';
-import { AudioClip } from './components/audioClip';
+import { AudioManager } from './audioManager';
 
 enum GameState {'READY', 'PLAYING', 'GAMEOVER'};
 
@@ -20,6 +20,7 @@ export class Game {
     input: Input;
     gameObjects: GameObject[];
     lastFrameTime: number;
+    private _audioManager = AudioManager.getInstance();
     constructor() {
         this._gameState = GameState.READY;
         console.log('Game created')
@@ -29,6 +30,7 @@ export class Game {
         this.lastFrameTime = 0;
         this._playerScore = 0;
         this._highScore = 0;
+        this._audioManager.addAudioClip('bgm', 'assets/audios/BGM.wav');
     }
     start(currentTime: number) {
         this.renderer.clear();
@@ -45,8 +47,7 @@ export class Game {
         ctx.fillText('PRESS ENTER TO START!', window.innerWidth/2, window.innerHeight/2);
         if(this.input.isKeyPressed('Enter') && this._gameState === GameState.READY)
         {
-            let bgm = new AudioClip('assets/audios/BGM.wav');
-            bgm.playLoop();
+            this._audioManager.playAudioClip('bgm', true);
             this._gameState = GameState.PLAYING;
             let player = new Player();
             game.addGameObject(player);
