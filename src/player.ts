@@ -32,7 +32,7 @@ export class Player extends GameObject {
         this._animator.addSprite(new SpriteRenderer('assets/images/seiba_walking_2.png'));
         this._animator.addSprite(new SpriteRenderer('assets/images/seiba_walking_3.png'));
     }
-    update(deltaTime : number, input : Input) {
+    public update(deltaTime : number, input : Input) {
         if ((input.isKeyPressed('KeyW') || input.isKeyPressed('Space'))&& this._isOnGround) {
             this._isOnGround = false;
             this._jumpForce = 1500;
@@ -69,10 +69,10 @@ export class Player extends GameObject {
         this._animator.update(deltaTime);
         //console.log(this.collider.x, this.collider.y, this.collider.width, this.collider.height);
     }
-    render() {
+    public render() {
         this._animator.render(this.position[0], this.position[1], this._width, this._height);
     }
-    onCollisionEnter(other: GameObject): void {
+    public onCollisionEnter(other: GameObject): void {
         this._animator.setState(new CollidedState());
         AudioManager.getInstance().getAudioClip('collide')?.play();
     }

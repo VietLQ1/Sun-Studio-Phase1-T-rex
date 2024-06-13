@@ -18,7 +18,7 @@ export class Game {
     private _highScore : number;
     renderer = new Renderer(canvas);
     input: Input;
-    gameObjects: GameObject[];
+    private _gameObjects: GameObject[];
     lastFrameTime: number;
     private _audioManager = AudioManager.getInstance();
     constructor() {
@@ -26,13 +26,13 @@ export class Game {
         console.log('Game created')
         this.renderer = new Renderer(canvas);
         this.input = new Input();
-        this.gameObjects = [];
+        this._gameObjects = [];
         this.lastFrameTime = 0;
         this._playerScore = 0;
         this._highScore = 0;
         this._audioManager.addAudioClip('bgm', 'assets/audios/BGM.wav');
     }
-    start(currentTime: number) {
+    public start(currentTime: number) {
         this.renderer.clear();
         var ctx = canvas.getContext('2d');
         if(!ctx)
@@ -63,10 +63,10 @@ export class Game {
             requestAnimationFrame((timestamp) => this.start(timestamp));
         }
         }
-    addGameObject(gameObject: GameObject) {
-        this.gameObjects.push(gameObject);
+    public addGameObject(gameObject: GameObject) {
+        this._gameObjects.push(gameObject);
     }
-    gameLoop(currentTime: number) {
+    private gameLoop(currentTime: number) {
         const deltaTime = (currentTime - this.lastFrameTime) / 1000;
         this.lastFrameTime = currentTime;
 
@@ -79,8 +79,8 @@ export class Game {
         else if(this._gameState === GameState.GAMEOVER)
             console.log('Game Over');
     }
-    update(deltaTime: number) {
-        this.gameObjects.forEach(obj => obj.update(deltaTime, this.input));
+    private update(deltaTime: number) {
+        this._gameObjects.forEach(obj => obj.update(deltaTime, this.input));
         if (this._gameState === GameState.PLAYING)
         {
             this._playerScore +=  deltaTime/2;   
@@ -92,18 +92,18 @@ export class Game {
         //console.log('Score: ' + this._playerScore);
     }
 
-    render() {
+    private render() {
         this.renderer.clear();
         //spriteRenderer.render(canvas.width-100, canvas.height-100, 100, 100);
-        this.gameObjects.forEach(obj => obj.render());
+        this._gameObjects.forEach(obj => obj.render());
         canvas.getContext('2d')?.fillText('Score: ' + Math.floor(this._playerScore), window.innerWidth/2, 50);
     }
-    checkCollisions() {
+    private checkCollisions() {
         //console.log('Checking collisions');
-        for (let i = 0; i < this.gameObjects.length; i++) {
-            for (let j = i + 1; j < this.gameObjects.length; j++) {
-                const obj1 = this.gameObjects[i];
-                const obj2 = this.gameObjects[j];
+        for (let i = 0; i < this._gameObjects.length; i++) {
+            for (let j = i + 1; j < this._gameObjects.length; j++) {
+                const obj1 = this._gameObjects[i];
+                const obj2 = this._gameObjects[j];
 
                 // Check if obj1 and obj2 are colliding
                 if (obj1.collider.isCollidingWith(obj2.collider)) {
@@ -113,7 +113,7 @@ export class Game {
             }
         }
     }
-    handleCollision(obj1: GameObject, obj2: GameObject) {
+    private handleCollision(obj1: GameObject, obj2: GameObject) {
         console.log('Collision detected!');
         obj1.onCollisionEnter(obj2);
         obj2.onCollisionEnter(obj1);
@@ -124,10 +124,10 @@ export class Game {
             this.gameOver(this.lastFrameTime);
         }
     }
-    gameOver(currentTime: number) {
+    private gameOver(currentTime: number) {
         this._gameState = GameState.GAMEOVER;
         this.renderer.clear();
-        this.gameObjects[0].render();
+        this._gameObjects[0].render();
         var ctx = canvas.getContext('2d');
         if(!ctx)
         {
@@ -139,7 +139,7 @@ export class Game {
         ctx.fillText('PRESS ENTER TO PLAY AGAIN!', window.innerWidth/2, window.innerHeight/2);
         if(this.input.isKeyPressed('Enter') && this._gameState === GameState.GAMEOVER)
         {
-            this.gameObjects = [];
+            this._gameObjects = [];
             let player = new Player();
             game.addGameObject(player);
             let cactus = new Cactus();

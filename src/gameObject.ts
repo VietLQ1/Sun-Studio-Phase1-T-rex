@@ -1,6 +1,7 @@
 import { Input } from "./input";
 import { Collider } from "./components/collider";
 import { SpriteRenderer } from "./components/spriteRenderer";
+
 export abstract class GameObject {
     position: [number, number, number];
     rotation: [number, number, number];

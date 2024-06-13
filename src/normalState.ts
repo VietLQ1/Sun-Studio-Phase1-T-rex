@@ -7,7 +7,7 @@ export class NormalState implements State {
         this._sprites = [];
         this._currentSprite = 0;
     }
-    update(frame: number) {
+    public update(frame: number) {
         if (frame % 30 == 0) {
             this._currentSprite++;
             if (this._currentSprite >= this._sprites.length) {
@@ -16,7 +16,7 @@ export class NormalState implements State {
         }
         //console.log(this._currentSprite);
     }
-    render(x: number, y: number, width: number, height: number) {
+    public render(x: number, y: number, width: number, height: number) {
         this._sprites[this._currentSprite].render(x, y, width, height);
     }
     public addSprite(sprite : SpriteRenderer) {

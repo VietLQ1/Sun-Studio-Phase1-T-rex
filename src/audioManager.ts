@@ -13,7 +13,7 @@ export class AudioManager {
         }
         return AudioManager._instance;
     }
-    addAudioClip(name: string, clipPath: string) {
+    public addAudioClip(name: string, clipPath: string) {
         if (this._audioClips.has(name)) {
             return;
         }
@@ -21,16 +21,16 @@ export class AudioManager {
         this._audioClips.get(name)?.changeVolume(this._volume);
         console.log(this._audioClips.size);
     }
-    getAudioClip(name: string) {
+    public getAudioClip(name: string) {
         return this._audioClips.get(name);
     }
-    changeVolume(volume: number) {
+    public changeVolume(volume: number) {
         this._volume = volume;
         for (let clip of this._audioClips.values()) {
             clip.changeVolume(this._volume);
         }
     }
-    playAudioClip(name: string, loop: boolean = false) {
+    public playAudioClip(name: string, loop: boolean = false) {
         let clip = this._audioClips.get(name);
         if (clip && !loop) {
             clip.play();

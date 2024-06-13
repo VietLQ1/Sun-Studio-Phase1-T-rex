@@ -24,15 +24,15 @@ export class Bird extends Obstacle
         this.collider = new Collider(this.position[0], this.position[1], this._width, this._height);
         //this.spriteRenderer = new SpriteRenderer('assets/images/bird_flap_1.png');
     }
-    update(deltaTime: number, input: Input): void {
+    public update(deltaTime: number, input: Input): void {
         super.update(deltaTime, input);
         this._animator.update(deltaTime);
     }
-    render() {
+    public render() {
         this._animator.render(this.position[0], this.position[1], this._width, this._height);
         //this.spriteRenderer.render(this.position[0], this.position[1], this._width, this._height);
     }
-    onCollisionEnter(other: GameObject): void {
+    public onCollisionEnter(other: GameObject): void {
         
     }
 }

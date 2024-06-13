@@ -7,16 +7,16 @@ export class Animator {
     constructor() {
         this._frame = 0;
     }
-    setState(state: State) {
+    public setState(state: State) {
         this._currentState = state;
     }
-    update(frame: number) {
+    public update(frame: number) {
         this._currentState.update(this._frame++);
     }
-    render(x: number, y: number, width: number, height: number) {
+    public render(x: number, y: number, width: number, height: number) {
         this._currentState.render(x, y, width, height);
     }
-    addSprite(sprite: SpriteRenderer) {
+    public addSprite(sprite: SpriteRenderer) {
         this._currentState.addSprite(sprite);
     }
 }

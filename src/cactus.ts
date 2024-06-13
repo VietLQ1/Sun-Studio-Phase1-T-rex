@@ -14,10 +14,10 @@ export class Cactus extends Obstacle
         this.collider = new Collider(this.position[0], this.position[1], this._width, this._height);
         this.spriteRenderer = new SpriteRenderer('assets/images/cactus.png');
     }
-    render() {
+    public render() {
         this.spriteRenderer.render(this.position[0], this.position[1], 100, this._height);
     }
-    onCollisionEnter(other: GameObject): void {
+    public onCollisionEnter(other: GameObject): void {
         
     }
 }

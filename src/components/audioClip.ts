@@ -3,18 +3,18 @@ export class AudioClip {
     constructor(clipPath : string) {
         this._audio = new Audio(clipPath);
     }
-    play() {
+    public play() {
         this._audio.loop = false;
         this._audio.play();
     }
-    playLoop() {
+    public playLoop() {
         this._audio.loop = true;
         this._audio.play();
     }
-    pause() {
+    public pause() {
         this._audio.pause();
     }
-    changeVolume(volume: number) {
+    public changeVolume(volume: number) {
         this._audio.volume = volume;
     }
 }

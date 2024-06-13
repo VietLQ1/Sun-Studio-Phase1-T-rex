@@ -8,10 +8,10 @@ export class CollidedState implements State {
         this._currentSprite = 0;
         this._sprites.push(new SpriteRenderer('assets/images/seiba_hurt.png'))
     }
-    update(frame: number) {
+    public update(frame: number) {
         //console.log(this._currentSprite);
     }
-    render(x: number, y: number, width: number, height: number) {
+    public render(x: number, y: number, width: number, height: number) {
         this._sprites[this._currentSprite].render(x, y, width, height);
     }
     public addSprite(sprite : SpriteRenderer) {

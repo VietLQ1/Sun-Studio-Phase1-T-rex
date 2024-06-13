@@ -7,7 +7,7 @@ export class Input {
         window.addEventListener('keyup', (e) => this.keys[e.code] = false);
     }
 
-    isKeyPressed(key: string): boolean {
+    public isKeyPressed(key: string): boolean {
         return !!this.keys[key];
     }
 }

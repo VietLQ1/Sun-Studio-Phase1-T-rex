@@ -11,7 +11,7 @@ export abstract class Obstacle extends GameObject {
         this._tag = 'obstacle';
         this.position[0] = window.innerWidth + Math.random() * 1000;
     }
-    update(deltaTime : number, input : Input) {
+    public update(deltaTime : number, input : Input) {
         this.position[0] -= 0.12 * deltaTime * this._speed;
         this.collider.x = this.position[0];
         this.collider.y = this.position[1];
@@ -19,8 +19,8 @@ export abstract class Obstacle extends GameObject {
             this.position[0] = window.innerWidth + Math.random() * 1000 * this._spawnInterval;
         }
     }
-    render() {
+    public render() {
     }
-    onCollisionEnter(other: GameObject): void {
+    public onCollisionEnter(other: GameObject): void {
     }
 }
