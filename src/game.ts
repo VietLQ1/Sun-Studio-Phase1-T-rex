@@ -89,7 +89,7 @@ export class Game {
                 this._highScore = this._playerScore;
             }
         }
-        console.log('Score: ' + this._playerScore);
+        //console.log('Score: ' + this._playerScore);
     }
 
     render() {

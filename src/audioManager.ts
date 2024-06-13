@@ -14,7 +14,12 @@ export class AudioManager {
         return AudioManager._instance;
     }
     addAudioClip(name: string, clipPath: string) {
+        if (this._audioClips.has(name)) {
+            return;
+        }
         this._audioClips.set(name, new AudioClip(clipPath));
+        this._audioClips.get(name)?.changeVolume(this._volume);
+        console.log(this._audioClips.size);
     }
     getAudioClip(name: string) {
         return this._audioClips.get(name);

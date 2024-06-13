@@ -6,6 +6,7 @@ import { State } from './components/state';
 import { NormalState } from './normalState';
 import { Animator } from './components/animator';
 import { CollidedState } from './collidedState';
+import { AudioManager } from './audioManager';
 export class Player extends GameObject {
 
     private _animator = new Animator();
@@ -20,6 +21,7 @@ export class Player extends GameObject {
         this._tag = 'player';
         this.position[0] = window.innerWidth / 5 - this._width / 2;
         this.position[1] = window.innerHeight - this._height;
+        AudioManager.getInstance().addAudioClip('jump', 'assets/audios/jump.wav');
         this._animator = new Animator();
         this._animator.setState(new NormalState());
         this.collider = new Collider(0, 0, 100, 100);
@@ -33,6 +35,7 @@ export class Player extends GameObject {
         if ((input.isKeyPressed('KeyW') || input.isKeyPressed('Space'))&& this._isOnGround) {
             this._isOnGround = false;
             this._jumpForce = 1500;
+            AudioManager.getInstance().getAudioClip('jump')?.play();
             //this._isJumping = true;
         }
         if (!this._isOnGround) {
