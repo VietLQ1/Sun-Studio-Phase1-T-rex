@@ -52,6 +52,7 @@ export class Game {
         ctx.fillText('PRESS ENTER TO START!', window.innerWidth/2, window.innerHeight/2);
         if(this.input.isKeyPressed('Enter') && this._gameState === GameState.READY)
         {
+            this._playerScore = 0;
             this._audioManager.playAudioClip('bgm', true);
             this._gameState = GameState.PLAYING;
             let player = new Player();
@@ -156,6 +157,7 @@ export class Game {
         ctx.fillText('Your Score: ' + Math.floor(this._playerScore), window.innerWidth/2, 50);
         ctx.fillText('High Score: ' + Math.floor(this._highScore), window.innerWidth/2, 100);
         ctx.fillText('PRESS ENTER TO PLAY AGAIN!', window.innerWidth/2, window.innerHeight/2);
+        ctx.fillText('PRESS ESC TO GO BACK TO MAIN MENU!', window.innerWidth/2, window.innerHeight/2 + 50);
         if(this.input.isKeyPressed('Enter') && this._gameState === GameState.GAMEOVER && this._delay > 10)
         {
             this._gameObjects = [];
@@ -168,6 +170,13 @@ export class Game {
             this._playerScore = 0;
             this._gameState = GameState.PLAYING;
             requestAnimationFrame((timestamp) => this.gameLoop(timestamp));
+        }
+        else if (this.input.isKeyPressed('Escape') && this._gameState === GameState.GAMEOVER && this._delay > 10)
+        {
+            this._gameObjects = [];
+            this._gameState = GameState.READY;
+            this._delay = 0;
+            this.start(0);
         }
         else
         {
