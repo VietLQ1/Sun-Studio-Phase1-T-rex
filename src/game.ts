@@ -211,6 +211,7 @@ export class Game {
         }
         else
         {
+            this.input.clearTouch();
             this._delay += 0.01 * (currentTime - this.lastFrameTime);
             this.lastFrameTime = currentTime;
             requestAnimationFrame((timestamp) => this.gameOver(timestamp));
