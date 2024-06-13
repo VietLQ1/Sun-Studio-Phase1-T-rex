@@ -21,6 +21,7 @@ export class Game {
     private _gameState : GameState;
     private _highScore : number;
     private _delay : number;
+    private _touched : boolean;
     renderer = new Renderer(canvas);
     input: Input;
     private _gameObjects: GameObject[];
@@ -51,7 +52,7 @@ export class Game {
         ctx.textBaseline = 'middle';
         ctx.fillStyle = 'black';
         ctx.fillText('PRESS ENTER TO START!', window.innerWidth/2, window.innerHeight/2);
-        if((this.input.isKeyPressed('Enter') || this.input.getTouchStart())&& this._gameState === GameState.READY)
+        if((this.input.isKeyPressed('Enter') || (this.input.getTouchEnd() && this._touched))&& this._gameState === GameState.READY)
         {
             this._playerScore = 0;
             this._audioManager.playAudioClip('bgm', true);
@@ -63,6 +64,11 @@ export class Game {
             let bird = new Bird();
             this.addGameObject(bird);
             requestAnimationFrame((timestamp) => this.gameLoop(timestamp));
+        }
+        else if (this.input.getTouchStart() && !this._touched)
+        {
+            this._touched = true;
+            requestAnimationFrame((timestamp) => this.start(timestamp));
         }
         else if (this._gameState === GameState.READY)
         {
