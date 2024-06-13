@@ -22,6 +22,7 @@ export class Player extends GameObject {
         this.position[0] = window.innerWidth / 5 - this._width / 2;
         this.position[1] = window.innerHeight - this._height;
         AudioManager.getInstance().addAudioClip('jump', 'assets/audios/jump.wav');
+        AudioManager.getInstance().addAudioClip('collide', 'assets/audios/collide.wav');
         this._animator = new Animator();
         this._animator.setState(new NormalState());
         this.collider = new Collider(0, 0, 100, 100);
@@ -73,5 +74,6 @@ export class Player extends GameObject {
     }
     onCollisionEnter(other: GameObject): void {
         this._animator.setState(new CollidedState());
+        AudioManager.getInstance().getAudioClip('collide')?.play();
     }
 }
