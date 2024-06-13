@@ -8,7 +8,7 @@ export class NormalState implements State {
         this._currentSprite = 0;
     }
     public update(frame: number) {
-        if (frame % 30 == 0) {
+        if (frame % 10 == 0) {
             this._currentSprite++;
             if (this._currentSprite >= this._sprites.length) {
                 this._currentSprite = 0;
