@@ -31,7 +31,11 @@ export class Input {
         return this.touchStart;
     }
 
-    public getTouchEnd(): { x: number, y: number } | null {
+    public getTouchEnd(): { x: number, y: number } | null {;
         return this.touchEnd;
+    }
+    public clearTouch() {
+        this.touchStart = null;
+        this.touchEnd = null;
     }
 }

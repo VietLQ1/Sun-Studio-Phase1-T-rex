@@ -8,15 +8,16 @@ import { Bird } from './bird';
 import { AudioManager } from './audioManager';
 
 enum GameState {'READY', 'PLAYING', 'GAMEOVER'};
-
+enum Platform {'PC', 'Mobile'};
 //const settingsBtn = document.createElement('button') as HTMLButtonElement;
 const canvas = document.createElement('canvas') as HTMLCanvasElement;
-const windowInput = new Input();
+//const windowInput = new Input();
 //settingsBtn.innerText = 'Settings';
 //document.body.appendChild(settingsBtn);
 document.body.appendChild(canvas);
 const spriteRenderer = new SpriteRenderer('assets/images/phaser-logo.png');
 export class Game {
+    private _platform : Platform;
     private _playerScore : number;
     private _gameState : GameState;
     private _highScore : number;
@@ -28,6 +29,7 @@ export class Game {
     lastFrameTime: number;
     private _audioManager = AudioManager.getInstance();
     constructor() {
+        this._platform = Platform.PC;
         this._delay = 0;
         this._gameState = GameState.READY;
         console.log('Game created')
@@ -52,7 +54,7 @@ export class Game {
         ctx.textBaseline = 'middle';
         ctx.fillStyle = 'black';
         ctx.fillText('PRESS ENTER TO START!', window.innerWidth/2, window.innerHeight/2);
-        if((this.input.isKeyPressed('Enter') || (this.input.getTouchEnd() && this._touched))&& this._gameState === GameState.READY)
+        if((this.input.isKeyPressed('Enter') || (this.input.getTouchEnd() && this._touched && this._platform == Platform.Mobile))&& this._gameState === GameState.READY)
         {
             this._playerScore = 0;
             this._audioManager.playAudioClip('bgm', true);
@@ -61,12 +63,22 @@ export class Game {
             this.addGameObject(player);
             let cactus = new Cactus();
             this.addGameObject(cactus);
-            let bird = new Bird();
-            this.addGameObject(bird);
+            if(this._platform === Platform.PC)
+            {
+                let bird = new Bird();
+                this.addGameObject(bird);
+            }
+            if(this._platform === Platform.Mobile)
+            {
+                this.input.clearTouch();
+                this._touched = false;
+            }
             requestAnimationFrame((timestamp) => this.gameLoop(timestamp));
         }
         else if (this.input.getTouchStart() && !this._touched)
         {
+            this._platform = Platform.Mobile;
+            this.input.clearTouch();
             this._touched = true;
             requestAnimationFrame((timestamp) => this.start(timestamp));
         }
@@ -163,17 +175,29 @@ export class Game {
         ctx.textBaseline = 'middle';
         ctx.fillText('Your Score: ' + Math.floor(this._playerScore), window.innerWidth/2, 50);
         ctx.fillText('High Score: ' + Math.floor(this._highScore), window.innerWidth/2, 100);
-        ctx.fillText('PRESS ENTER TO PLAY AGAIN!', window.innerWidth/2, window.innerHeight/2);
-        ctx.fillText('PRESS ESC TO GO BACK TO MAIN MENU!', window.innerWidth/2, window.innerHeight/2 + 50);
-        if(this.input.isKeyPressed('Enter') && this._gameState === GameState.GAMEOVER && this._delay > 10)
+        if(this._platform === Platform.Mobile)
         {
+            ctx.fillText('TAP TO RETRY!', window.innerWidth/2, window.innerHeight/2);
+        }
+        else
+        {
+            ctx.fillText('PRESS ENTER TO PLAY AGAIN!', window.innerWidth/2, window.innerHeight/2);
+            ctx.fillText('PRESS ESC TO GO BACK TO MAIN MENU!', window.innerWidth/2, window.innerHeight/2 + 50);
+        }
+       
+        if((this.input.isKeyPressed('Enter') || this.input.getTouchEnd()) && this._gameState === GameState.GAMEOVER && this._delay > 10)
+        {
+            this.input.clearTouch();
             this._gameObjects = [];
             let player = new Player();
             this.addGameObject(player);
             let cactus = new Cactus();
             this.addGameObject(cactus);
-            let bird = new Bird();
-            this.addGameObject(bird);
+            if(this._platform === Platform.PC)
+            {
+                let bird = new Bird();
+                this.addGameObject(bird);
+            }
             this._playerScore = 0;
             this._gameState = GameState.PLAYING;
             requestAnimationFrame((timestamp) => this.gameLoop(timestamp));

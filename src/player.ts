@@ -33,10 +33,11 @@ export class Player extends GameObject {
         this._animator.addSprite(new SpriteRenderer('assets/images/seiba_walking_3.png'));
     }
     public update(deltaTime : number, input : Input) {
-        if ((input.isKeyPressed('KeyW') || input.isKeyPressed('Space'))&& this._isOnGround) {
+        if ((input.isKeyPressed('KeyW') || input.isKeyPressed('Space') || input.getTouchStart())&& this._isOnGround) {
             this._isOnGround = false;
             this._jumpForce = 1500;
             AudioManager.getInstance().getAudioClip('jump')?.play();
+            input.clearTouch();
             //this._isJumping = true;
         }
         if (!this._isOnGround) {
