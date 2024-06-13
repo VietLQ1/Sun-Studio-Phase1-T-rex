@@ -19,12 +19,14 @@ export class Game {
     private _playerScore : number;
     private _gameState : GameState;
     private _highScore : number;
+    private _delay : number;
     renderer = new Renderer(canvas);
     input: Input;
     private _gameObjects: GameObject[];
     lastFrameTime: number;
     private _audioManager = AudioManager.getInstance();
     constructor() {
+        this._delay = 0;
         this._gameState = GameState.READY;
         console.log('Game created')
         this.renderer = new Renderer(canvas);
@@ -133,6 +135,7 @@ export class Game {
         {
             console.log('Player collided with obstacle');
             this.renderer.clear();
+            this._delay = 0;
             this.gameOver(this.lastFrameTime);
         }
     }
@@ -153,7 +156,7 @@ export class Game {
         ctx.fillText('Your Score: ' + Math.floor(this._playerScore), window.innerWidth/2, 50);
         ctx.fillText('High Score: ' + Math.floor(this._highScore), window.innerWidth/2, 100);
         ctx.fillText('PRESS ENTER TO PLAY AGAIN!', window.innerWidth/2, window.innerHeight/2);
-        if(this.input.isKeyPressed('Enter') && this._gameState === GameState.GAMEOVER)
+        if(this.input.isKeyPressed('Enter') && this._gameState === GameState.GAMEOVER && this._delay > 10)
         {
             this._gameObjects = [];
             let player = new Player();
@@ -168,6 +171,7 @@ export class Game {
         }
         else
         {
+            this._delay += 0.01 * (currentTime - this.lastFrameTime);
             this.lastFrameTime = currentTime;
             requestAnimationFrame((timestamp) => this.gameOver(timestamp));
         }
