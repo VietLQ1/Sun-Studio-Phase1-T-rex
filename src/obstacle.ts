@@ -15,9 +15,9 @@ export abstract class Obstacle extends GameObject {
         this.position[0] -= 0.12 * deltaTime * this._speed;
         this.collider.x = this.position[0];
         this.collider.y = this.position[1];
-        if (this.position[0] < -this._width) {
-            this.position[0] = window.innerWidth + Math.random() * 1000 * this._spawnInterval;
-        }
+        // if (this.position[0] < -this._width) {
+        //     this.position[0] = window.innerWidth + Math.random() * 1000 * this._spawnInterval;;
+        // }
     }
     public render() {
     }

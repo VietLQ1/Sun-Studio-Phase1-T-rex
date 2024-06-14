@@ -61,10 +61,7 @@ export class Game {
             this._gameState = GameState.PLAYING;
             let player = new Player();
             this.addGameObject(player);
-            let cactus = new Cactus();
-            this.addGameObject(cactus);
-            let bird = new Bird();
-            this.addGameObject(bird);
+            this.addGameObject(new Cactus());
             if(this._platform === Platform.Mobile)
             {
                 this.input.clearTouch();
@@ -105,6 +102,21 @@ export class Game {
         this._gameObjects.forEach(obj => obj.update(deltaTime, this.input));
         if (this._gameState === GameState.PLAYING)
         {
+            if (this._gameObjects[1].position[0] === this._gameObjects[0].position[0]) {
+                
+            }
+            for (let i = 1; i < this._gameObjects.length; i++) {
+                if (this._gameObjects[i].position[0] < -this._gameObjects[i].collider.width) {
+                    let random = Math.random();
+                    if (random < 0.75) {
+                        this.addGameObject(new Cactus());
+                    }
+                    else {
+                        this.addGameObject(new Bird());
+                    }
+                    this._gameObjects.splice(i, 1);
+                }
+            }
             this._playerScore +=  deltaTime/2;   
             if(this._playerScore > this._highScore)
             {
@@ -188,10 +200,7 @@ export class Game {
             this._gameObjects = [];
             let player = new Player();
             this.addGameObject(player);
-            let cactus = new Cactus();
-            this.addGameObject(cactus);
-            let bird = new Bird();
-            this.addGameObject(bird);
+            this.addGameObject(new Cactus());
             this._playerScore = 0;
             this._gameState = GameState.PLAYING;
             requestAnimationFrame((timestamp) => this.gameLoop(timestamp));
