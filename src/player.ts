@@ -1,7 +1,7 @@
 import { GameObject } from './GameObject';
 import { Collider } from './components/Collider';
 import { SpriteRenderer } from './components/SpriteRenderer';
-import { Input } from './Input';
+import { Input } from './input/Input';
 import { State } from './components/State';
 import { NormalState } from './NormalState';
 import { Animator } from './components/Animator';

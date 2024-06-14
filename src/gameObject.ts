@@ -1,4 +1,4 @@
-import { Input } from "./Input";
+import { Input } from "./input/Input";
 import { Collider } from "./components/Collider";
 import { SpriteRenderer } from "./components/SpriteRenderer";
 

@@ -4,7 +4,7 @@ import { SpriteRenderer } from "./components/SpriteRenderer";
 import { GameObject } from "./GameObject";
 import { Animator } from "./components/Animator";
 import { NormalState } from "./NormalState";
-import { Input } from "./Input";
+import { Input } from "./input/Input";
 export class Bird extends Obstacle
 {
     private _animator : Animator;
