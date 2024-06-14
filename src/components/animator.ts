@@ -1,5 +1,5 @@
-import { State} from "./state";
-import { SpriteRenderer } from "./spriteRenderer";
+import { State} from "./State";
+import { SpriteRenderer } from "./SpriteRenderer";
 
 export class Animator {
     private _frame : number;

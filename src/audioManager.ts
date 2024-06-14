@@ -1,4 +1,4 @@
-import { AudioClip } from "./components/audioClip";
+import { AudioClip } from "./components/AudioClip";
 export class AudioManager {
     private static _instance: AudioManager;
     private _audioClips: Map<string, AudioClip>;

@@ -1,7 +1,7 @@
-import { Obstacle} from "./obstacle";
-import { Collider } from "./components/collider";
-import { SpriteRenderer } from "./components/spriteRenderer";
-import { GameObject } from "./gameObject";
+import { Obstacle} from "./Obstacle";
+import { Collider } from "./components/Collider";
+import { SpriteRenderer } from "./components/SpriteRenderer";
+import { GameObject } from "./GameObject";
 export class Cactus extends Obstacle
 {
     constructor() {

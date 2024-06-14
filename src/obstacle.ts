@@ -1,5 +1,5 @@
-import { GameObject } from "./gameObject";
-import { Input } from "./input";
+import { GameObject } from "./GameObject";
+import { Input } from "./Input";
 
 export abstract class Obstacle extends GameObject {
     protected _speed: number;
