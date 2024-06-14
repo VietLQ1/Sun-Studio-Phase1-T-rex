@@ -18,6 +18,7 @@ const canvas = document.createElement('canvas') as HTMLCanvasElement;
 document.body.appendChild(canvas);
 const spriteRenderer = new SpriteRenderer('assets/images/phaser-logo.png');
 export class Game {
+    private _timescale : number;
     private _platform : Platform;
     private _playerScore : number;
     private _gameState : GameState;
@@ -30,6 +31,8 @@ export class Game {
     lastFrameTime: number;
     private _audioManager = AudioManager.getInstance();
     constructor() {
+        this._touched = false;
+        this._timescale = 1;
         this._platform = Platform.PC;
         this._delay = 0;
         this._gameState = GameState.READY;

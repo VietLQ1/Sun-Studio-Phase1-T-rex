@@ -25,7 +25,7 @@ export class Player extends GameObject {
         AudioManager.getInstance().addAudioClip('collide', 'assets/audios/collide.wav');
         this._animator = new Animator();
         this._animator.setState(new NormalState());
-        this.collider = new Collider(0, 0, 100, 100);
+        this.collider = new Collider(this.position[0], this.position[1], this._width , this._height);
         this.spriteRenderer = new SpriteRenderer('assets/images/seiba_walking_0.png');
         this._animator.addSprite(this.spriteRenderer);
         this._animator.addSprite(new SpriteRenderer('assets/images/seiba_walking_1.png'));
