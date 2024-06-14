@@ -10,15 +10,11 @@ import { AudioManager } from './AudioManager';
 
 enum GameState {'READY', 'PLAYING', 'GAMEOVER'};
 enum Platform {'PC', 'Mobile'};
-//const settingsBtn = document.createElement('button') as HTMLButtonElement;
 const canvas = document.createElement('canvas') as HTMLCanvasElement;
-//const windowInput = new Input();
-//settingsBtn.innerText = 'Settings';
-//document.body.appendChild(settingsBtn);
+
 document.body.appendChild(canvas);
 const spriteRenderer = new SpriteRenderer('assets/images/phaser-logo.png');
 export class Game {
-    private _timescale : number;
     private _platform : Platform;
     private _playerScore : number;
     private _gameState : GameState;
@@ -32,7 +28,6 @@ export class Game {
     private _audioManager = AudioManager.getInstance();
     constructor() {
         this._touched = false;
-        this._timescale = 1;
         this._platform = Platform.PC;
         this._delay = 0;
         this._gameState = GameState.READY;
@@ -92,7 +87,7 @@ export class Game {
     private gameLoop(currentTime: number) {
         const deltaTime = (currentTime - this.lastFrameTime) / 1000;
         this.lastFrameTime = currentTime;
-
+        
         this.update(deltaTime);
         this.checkCollisions();
         this.render();
