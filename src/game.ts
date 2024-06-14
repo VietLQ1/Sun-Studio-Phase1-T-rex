@@ -1,11 +1,11 @@
 import { SpriteRenderer } from './components/SpriteRenderer';
 import { Input } from './input/Input';
-import { GameObject } from './GameObject';
+import { GameObject } from './game-object/GameObject';
 import { Renderer } from './Renderer';
-import { Cactus } from './Cactus';
-import { Bird } from './Bird';
-import { Player } from './Player';
-import { AudioManager } from './AudioManager';
+import { Cactus } from './game-object/Cactus';
+import { Bird } from './game-object/Bird';
+import { Player } from './game-object/Player';
+import { AudioManager } from './manager/AudioManager';
 
 
 enum GameState {'READY', 'PLAYING', 'GAMEOVER'};

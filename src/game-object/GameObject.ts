@@ -1,6 +1,6 @@
-import { Input } from "./input/Input";
-import { Collider } from "./components/Collider";
-import { SpriteRenderer } from "./components/SpriteRenderer";
+import { Input } from "../input/Input";
+import { Collider } from "../components/Collider";
+import { SpriteRenderer } from "../components/SpriteRenderer";
 
 export abstract class GameObject {
     position: [number, number, number];

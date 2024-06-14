@@ -1,5 +1,5 @@
-import { State } from './components/State';
-import { SpriteRenderer } from './components/SpriteRenderer';
+import { State } from '../components/State';
+import { SpriteRenderer } from '../components/SpriteRenderer';
 export class NormalState implements State {
     private _sprites : SpriteRenderer[];
     private _currentSprite : number;

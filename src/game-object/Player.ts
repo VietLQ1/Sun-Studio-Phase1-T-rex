@@ -1,12 +1,12 @@
 import { GameObject } from './GameObject';
-import { Collider } from './components/Collider';
-import { SpriteRenderer } from './components/SpriteRenderer';
-import { Input } from './input/Input';
-import { State } from './components/State';
-import { NormalState } from './NormalState';
-import { Animator } from './components/Animator';
-import { CollidedState } from './CollidedState';
-import { AudioManager } from './AudioManager';
+import { Collider } from '../components/Collider';
+import { SpriteRenderer } from '../components/SpriteRenderer';
+import { Input } from '../input/Input';
+import { State } from '../components/State';
+import { NormalState } from '../animation/NormalState';
+import { Animator } from '../components/Animator';
+import { CollidedState } from '../animation/CollidedState';
+import { AudioManager } from '../manager/AudioManager';
 export class Player extends GameObject {
 
     private _animator = new Animator();
