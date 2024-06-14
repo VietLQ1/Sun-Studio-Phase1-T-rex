@@ -6,6 +6,7 @@ import { Cactus } from './game-object/Cactus';
 import { Bird } from './game-object/Bird';
 import { Player } from './game-object/Player';
 import { AudioManager } from './manager/AudioManager';
+import { ScoreManager } from './manager/ScoreManager';
 
 
 enum GameState {'READY', 'PLAYING', 'GAMEOVER'};
@@ -16,9 +17,7 @@ document.body.appendChild(canvas);
 const spriteRenderer = new SpriteRenderer('assets/images/phaser-logo.png');
 export class Game {
     private _platform : Platform;
-    private _playerScore : number;
     private _gameState : GameState;
-    private _highScore : number;
     private _delay : number;
     private _touched : boolean;
     renderer = new Renderer(canvas);
@@ -36,8 +35,6 @@ export class Game {
         this.input = new Input();
         this._gameObjects = [];
         this.lastFrameTime = 0;
-        this._playerScore = 0;
-        this._highScore = localStorage.getItem('highScore') ? parseInt(localStorage.getItem('highScore') as string) : 0;
         this._audioManager.addAudioClip('bgm', 'assets/audios/BGM.wav');
     }
     public start(currentTime: number) {
@@ -55,7 +52,7 @@ export class Game {
         ctx.fillText('PRESS ENTER TO START!', window.innerWidth/2, window.innerHeight/2);
         if((this.input.isKeyPressed('Enter') || (this.input.getTouchEnd() && this._touched && this._platform == Platform.Mobile))&& this._gameState === GameState.READY)
         {
-            this._playerScore = 0;
+            ScoreManager.getInstance().resetScore();
             this._audioManager.playAudioClip('bgm', true);
             this._gameState = GameState.PLAYING;
             let player = new Player();
@@ -116,11 +113,7 @@ export class Game {
                     this._gameObjects.splice(i, 1);
                 }
             }
-            this._playerScore +=  deltaTime/2;   
-            if(this._playerScore > this._highScore)
-            {
-                this._highScore = this._playerScore;
-            }
+            ScoreManager.getInstance().increaseScore(deltaTime);   
         }
         //console.log('Score: ' + this._playerScore);
     }
@@ -138,7 +131,7 @@ export class Game {
         ctx.font = 'bold 50px Arial';
         ctx.textAlign = 'center';
         ctx.textBaseline = 'middle';
-        ctx.fillText('Score: ' + Math.floor(this._playerScore), window.innerWidth/2, 50);
+        ctx.fillText('Score: ' + Math.floor(ScoreManager.getInstance().score), window.innerWidth/2, 50);
     }
     private checkCollisions() {
         //console.log('Checking collisions');
@@ -177,12 +170,12 @@ export class Game {
             console.log('Failed to get 2d context');
             return;
         }
-        localStorage.setItem('highScore', this._highScore.toString());
+        localStorage.setItem('highScore', ScoreManager.getInstance().highScore.toString());
         ctx.font = 'bold 50px Arial';
         ctx.textAlign = 'center';
         ctx.textBaseline = 'middle';
-        ctx.fillText('Your Score: ' + Math.floor(this._playerScore), window.innerWidth/2, 50);
-        ctx.fillText('High Score: ' + Math.floor(this._highScore), window.innerWidth/2, 100);
+        ctx.fillText('Your Score: ' + Math.floor(ScoreManager.getInstance().score), window.innerWidth/2, 50);
+        ctx.fillText('High Score: ' + Math.floor(ScoreManager.getInstance().highScore), window.innerWidth/2, 100);
         if(this._platform === Platform.Mobile)
         {
             ctx.fillText('TAP TO RETRY!', window.innerWidth/2, window.innerHeight/2);
@@ -200,7 +193,7 @@ export class Game {
             let player = new Player();
             this.addGameObject(player);
             this.addGameObject(new Cactus());
-            this._playerScore = 0;
+            ScoreManager.getInstance().resetScore();
             this._gameState = GameState.PLAYING;
             requestAnimationFrame((timestamp) => this.gameLoop(timestamp));
         }
