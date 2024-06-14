@@ -7,6 +7,7 @@ import { Bird } from './Bird';
 import { Player } from './Player';
 import { AudioManager } from './AudioManager';
 
+
 enum GameState {'READY', 'PLAYING', 'GAMEOVER'};
 enum Platform {'PC', 'Mobile'};
 //const settingsBtn = document.createElement('button') as HTMLButtonElement;
