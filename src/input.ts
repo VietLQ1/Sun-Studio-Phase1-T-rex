@@ -15,11 +15,13 @@ export class Input {
 
     handleTouchStart(e: TouchEvent) {
         this.touchStart = { x: e.touches[0].clientX, y: e.touches[0].clientY };
+        //console.log(this.touchStart.x, this.touchStart.y);
     }
 
     handleTouchEnd(e: TouchEvent) {
         if (e.changedTouches && e.changedTouches[0]) {
             this.touchEnd = { x: e.changedTouches[0].clientX, y: e.changedTouches[0].clientY };
+            console.log(this.touchEnd.x, this.touchEnd.y);
         }
     }
 

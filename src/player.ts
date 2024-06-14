@@ -33,7 +33,8 @@ export class Player extends GameObject {
         this._animator.addSprite(new SpriteRenderer('assets/images/seiba_walking_3.png'));
     }
     public update(deltaTime : number, input : Input) {
-        if ((input.isKeyPressed('KeyW') || input.isKeyPressed('Space') || input.getTouchStart())&& this._isOnGround) {
+        let touch = input.getTouchStart();
+        if ((input.isKeyPressed('KeyW') || input.isKeyPressed('Space') || (touch && touch.y < window.innerHeight/2))&& this._isOnGround) {
             this._isOnGround = false;
             this._jumpForce = 1500 * window.innerHeight / 1080;
             AudioManager.getInstance().getAudioClip('jump')?.play();
@@ -50,12 +51,13 @@ export class Player extends GameObject {
                 this._isOnGround = true;
             }
         }
-        if (input.isKeyPressed('KeyS') && this._isOnGround) {
+        if ((input.isKeyPressed('KeyS') || (touch && touch.y > window.innerHeight / 2 && input.getTouchEnd() == null)) && this._isOnGround) {
             this._height = 100 * window.innerHeight / 1080;
             this.position[1] = window.innerHeight - this._height;
         }
         else if (this._isOnGround) 
         {
+            input.clearTouch();
             this._height = 200 * window.innerHeight / 1080;
             this.position[1] = window.innerHeight - this._height;
         }

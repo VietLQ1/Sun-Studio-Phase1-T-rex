@@ -12,10 +12,10 @@ export class Bird extends Obstacle
         super();
         this._width = 60 * window.innerHeight / 1080;
         this._height = 60 * window.innerHeight / 1080;
-        this._speed = 10000 * window.innerHeight / 1080;
+        this._speed = 10000 * window.innerWidth / 1920;
         this._spawnInterval = 3.14159265 * 3;
         this.position[0] = this.position[0] + window.innerWidth + Math.random() * 3000 * this._spawnInterval;
-        this.position[1] = window.innerHeight - this._height - 180; 
+        this.position[1] = window.innerHeight - this._height - 180 * window.innerHeight / 1080; 
         this._animator = new Animator();
         this._animator.setState(new NormalState());
         this._animator.addSprite(new SpriteRenderer('assets/images/bird_flap_0.png'));

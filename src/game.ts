@@ -63,11 +63,8 @@ export class Game {
             this.addGameObject(player);
             let cactus = new Cactus();
             this.addGameObject(cactus);
-            if(this._platform === Platform.PC)
-            {
-                let bird = new Bird();
-                this.addGameObject(bird);
-            }
+            let bird = new Bird();
+            this.addGameObject(bird);
             if(this._platform === Platform.Mobile)
             {
                 this.input.clearTouch();
@@ -75,7 +72,7 @@ export class Game {
             }
             requestAnimationFrame((timestamp) => this.gameLoop(timestamp));
         }
-        else if (this.input.getTouchStart() && !this._touched)
+        else if (this.input.getTouchEnd() && !this._touched)
         {
             this._platform = Platform.Mobile;
             this.input.clearTouch();
@@ -185,7 +182,7 @@ export class Game {
             ctx.fillText('PRESS ESC TO GO BACK TO MAIN MENU!', window.innerWidth/2, window.innerHeight/2 + 50);
         }
        
-        if((this.input.isKeyPressed('Enter') || this.input.getTouchEnd()) && this._gameState === GameState.GAMEOVER && this._delay > 10)
+        if((this.input.isKeyPressed('Enter') || this.input.getTouchStart()) && this._gameState === GameState.GAMEOVER && this._delay > 10)
         {
             this.input.clearTouch();
             this._gameObjects = [];
@@ -193,11 +190,8 @@ export class Game {
             this.addGameObject(player);
             let cactus = new Cactus();
             this.addGameObject(cactus);
-            if(this._platform === Platform.PC)
-            {
-                let bird = new Bird();
-                this.addGameObject(bird);
-            }
+            let bird = new Bird();
+            this.addGameObject(bird);
             this._playerScore = 0;
             this._gameState = GameState.PLAYING;
             requestAnimationFrame((timestamp) => this.gameLoop(timestamp));
