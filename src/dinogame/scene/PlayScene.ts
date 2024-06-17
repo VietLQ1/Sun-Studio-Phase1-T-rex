@@ -4,6 +4,7 @@ import { Player } from "../game-object/Player";
 import { Input } from "../../engine/input/Input";
 import { ScoreManager } from "../../engine/manager/ScoreManager";
 import { Scene } from "../../engine/scene/Scene";
+import { SceneManager } from "../../engine/scene/SceneManager";
 
 export class PlayScene extends Scene
 {
@@ -32,6 +33,10 @@ export class PlayScene extends Scene
                 }
                 this._gameObjects.splice(i, 1);
             }
+        }
+        if(!document.hasFocus())
+        {
+            SceneManager.getInstance().loadScene(2);
         }
         ScoreManager.getInstance().increaseScore(deltaTime);   
     }

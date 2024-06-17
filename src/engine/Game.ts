@@ -18,7 +18,7 @@ export class Game {
     }
     public start(currentTime: number) {
         requestAnimationFrame((timestamp) => this.gameLoop(timestamp));
-        }
+    }
     private gameLoop(currentTime: number) {
         const deltaTime = (currentTime - this.lastFrameTime) / 1000;
         this.lastFrameTime = currentTime;
