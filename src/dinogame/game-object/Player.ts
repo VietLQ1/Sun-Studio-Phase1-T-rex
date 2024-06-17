@@ -2,13 +2,11 @@ import { GameObject } from '../../engine/GameObject';
 import { Collider } from '../../engine/components/Collider';
 import { SpriteRenderer } from '../../engine/components/SpriteRenderer';
 import { Input } from '../../engine/input/Input';
-import { State } from '../../engine/components/State';
 import { NormalState } from '../animation/NormalState';
 import { Animator } from '../../engine/components/Animator';
 import { CollidedState } from '../animation/CollidedState';
 import { AudioManager } from '../../engine/manager/AudioManager';
 import { RigidBody } from '../../engine/components/Rigidbody';
-import { Scene } from '../../engine/scene/Scene';
 import { SceneManager } from '../../engine/scene/SceneManager';
 export class Player extends GameObject {
 

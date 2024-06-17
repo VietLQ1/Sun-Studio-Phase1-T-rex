@@ -1,6 +1,5 @@
 import { GameObject } from "../GameObject";
 import { Scene } from "../scene/Scene";
-import { SceneManager } from "../scene/SceneManager";
 
 export class CollisionManager {
     private static _instance: CollisionManager;

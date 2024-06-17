@@ -1,4 +1,3 @@
-import { GameObject } from "../../engine/GameObject";
 import { Input } from "../../engine/input/Input";
 import { GameManager } from "../manager/GameManager";
 import { ScoreManager } from "../../engine/manager/ScoreManager";

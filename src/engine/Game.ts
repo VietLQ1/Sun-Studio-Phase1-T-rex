@@ -1,11 +1,8 @@
-import { SpriteRenderer } from './components/SpriteRenderer';
+
 import { Input } from './input/Input';
 import { Renderer } from './components/Renderer';
 import { AudioManager } from './manager/AudioManager';
 import { SceneManager } from './scene/SceneManager';
-import { MenuScene } from '../dinogame/scene/MenuScene';
-import { PlayScene } from '../dinogame/scene/PlayScene';
-import { GameOverScene } from '../dinogame/scene/GameOverScene';
 import { CollisionManager } from './manager/CollisionManager';
 export class Game {
     renderer : Renderer;

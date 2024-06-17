@@ -1,6 +1,4 @@
-import { doc } from "prettier";
 import { Input } from "../../engine/input/Input";
-import { AudioManager } from "../../engine/manager/AudioManager";
 import { GameManager } from "../manager/GameManager";
 import { Scene } from "../../engine/scene/Scene";
 import { SceneManager } from "../../engine/scene/SceneManager";
