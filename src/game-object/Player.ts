@@ -14,7 +14,6 @@ export class Player extends GameObject {
     private _width = 160 * window.innerHeight / 1080;
     private _height = 200 * window.innerHeight / 1080;
     private _isOnGround = true;
-    //private _isJumping = false;
     private _jumpForce = 1500 * window.innerHeight / 1080;
     constructor() {
         super();
@@ -63,12 +62,6 @@ export class Player extends GameObject {
             this.position[1] = window.innerHeight - this._height;
             this._isDuck = false;
         }
-        // if (input.isKeyPressed('KeyA')) {
-        //     this.position[0] -= this._speed * deltaTime;
-        // }
-        // if (input.isKeyPressed('KeyD')) {
-        //     this.position[0] += this._speed * deltaTime;
-        // }
         this.collider.x = this.position[0];
         this.collider.y = this.position[1];
         this.collider.height = this._height;
