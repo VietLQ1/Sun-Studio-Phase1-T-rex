@@ -21,7 +21,7 @@ export class Input {
     handleTouchEnd(e: TouchEvent) {
         if (e.changedTouches && e.changedTouches[0]) {
             this.touchEnd = { x: e.changedTouches[0].clientX, y: e.changedTouches[0].clientY };
-            console.log(this.touchEnd.x, this.touchEnd.y);
+            //console.log(this.touchEnd.x, this.touchEnd.y);
         }
     }
 

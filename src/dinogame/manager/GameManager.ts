@@ -26,7 +26,6 @@ export class GameManager {
         this._isMobile = value;
     }
     public get menuText() {
-        console.log(this._isMobile);
         return this._menuText;
     }
     public get gameOverText() {

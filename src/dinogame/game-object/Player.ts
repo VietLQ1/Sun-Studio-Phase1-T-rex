@@ -8,6 +8,7 @@ import { CollidedState } from '../animation/CollidedState';
 import { AudioManager } from '../../engine/manager/AudioManager';
 import { RigidBody } from '../../engine/components/Rigidbody';
 import { SceneManager } from '../../engine/scene/SceneManager';
+import { GameManager } from '../manager/GameManager';
 export class Player extends GameObject {
 
     private _animator = new Animator();
@@ -37,14 +38,16 @@ export class Player extends GameObject {
         if ((input.isKeyPressed('KeyW') || input.isKeyPressed('Space') || (touch && touch.x > window.innerWidth/2))&& this._rigidbody.isGrounded && !this._isDuck) {
             this._rigidbody.applyForce([0, this._jumpForce]);
             AudioManager.getInstance().getAudioClip('jump')?.play();
+        }
+        if (!this._rigidbody.isGrounded) {
             input.clearTouch();
         }
-
         this._rigidbody.update(deltaTime);
         if ((input.isKeyPressed('KeyS') || (touch && touch.x < window.innerWidth / 2 && input.getTouchEnd() == null)) && this._rigidbody.isGrounded) {
             this._isDuck = true;
             this._height = 100 * window.innerHeight / 1080;
             this.position[1] = window.innerHeight - this._height;
+            input.clearTouch();
         }
         else if (this._rigidbody.isGrounded) 
         {

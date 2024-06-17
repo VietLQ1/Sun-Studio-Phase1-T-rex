@@ -23,10 +23,10 @@ export class RigidBody{
         if(!this._isKinematic && !this._isGrounded){
             this._velocity[1] -= this._gravity * deltaTime * window.innerHeight / 1080;
             this._gameObject.position[1] -= this._velocity[1] * deltaTime;
-        }
-        if(this._gameObject.position[1] >= window.innerHeight - this._gameObject.height){
-            this._gameObject.position[1] = window.innerHeight - this._gameObject.height;
-            this._isGrounded = true;
+            if(this._gameObject.position[1] >= window.innerHeight - this._gameObject.height){
+                this._gameObject.position[1] = window.innerHeight - this._gameObject.height;
+                this._isGrounded = true;
+            }
         }
         this._gameObject.position[0] += this._velocity[0] * deltaTime;
     }
