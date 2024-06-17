@@ -8,6 +8,8 @@ import { Animator } from '../../engine/components/Animator';
 import { CollidedState } from '../animation/CollidedState';
 import { AudioManager } from '../../engine/manager/AudioManager';
 import { RigidBody } from '../../engine/components/Rigidbody';
+import { Scene } from '../../engine/scene/Scene';
+import { SceneManager } from '../../engine/scene/SceneManager';
 export class Player extends GameObject {
 
     private _animator = new Animator();
@@ -39,7 +41,7 @@ export class Player extends GameObject {
             AudioManager.getInstance().getAudioClip('jump')?.play();
             input.clearTouch();
         }
-        
+
         this._rigidbody.update(deltaTime);
         if ((input.isKeyPressed('KeyS') || (touch && touch.x < window.innerWidth / 2 && input.getTouchEnd() == null)) && this._rigidbody.isGrounded) {
             this._isDuck = true;
@@ -64,6 +66,10 @@ export class Player extends GameObject {
     }
     public onCollisionEnter(other: GameObject): void {
         this._animator.setState(new CollidedState());
+        if (other.tag == 'obstacle')
+        {
+            SceneManager.getInstance().loadScene(2);
+        }
         AudioManager.getInstance().getAudioClip('collide')?.play();
     }
 }
