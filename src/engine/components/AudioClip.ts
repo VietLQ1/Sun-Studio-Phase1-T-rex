@@ -5,11 +5,11 @@ export class AudioClip {
     }
     public play() {
         this._audio.loop = false;
-        this._audio.play();
+        this._audio.play().catch((error) => {"Error playing audio: " + error});
     }
     public playLoop() {
         this._audio.loop = true;
-        this._audio.play();
+        this._audio.play().catch((error) => {"Error playing audio: " + error});
     }
     public pause() {
         this._audio.pause();
