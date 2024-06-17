@@ -14,7 +14,7 @@ export class GameOverScene extends Scene {
         this._gameObjects = [];
     }
     public update(deltaTime: number , input: Input): void {
-        super.update(deltaTime, input);
+        //super.update(deltaTime, input);
         this._delay += deltaTime*10;
         if(this._delay > 10 && (input.isKeyPressed('Enter') || input.getTouchEnd()))
         {

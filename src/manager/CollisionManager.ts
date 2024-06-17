@@ -1,5 +1,6 @@
 import { GameObject } from "../game-object/GameObject";
 import { Scene } from "../scene/Scene";
+import { SceneManager } from "../scene/SceneManager";
 
 export class CollisionManager {
     private static _instance: CollisionManager;
@@ -25,5 +26,9 @@ export class CollisionManager {
     private handleCollision(obj1: GameObject, obj2: GameObject): void {
         obj1.onCollisionEnter(obj2);
         obj2.onCollisionEnter(obj1);
+        if(obj1.tag === 'player' || obj2.tag === 'player')
+        {
+            SceneManager.getInstance().loadScene(2);
+        }
     }
 }

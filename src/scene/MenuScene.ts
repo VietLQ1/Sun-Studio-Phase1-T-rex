@@ -15,10 +15,15 @@ export class MenuScene extends Scene
     update(deltaTime: number, input: Input): void {
         super.update(deltaTime, input);
         console.log('Menu Scene');
-        if(input.isKeyPressed('Enter') || input.getTouchEnd())
+        if(input.isKeyPressed('Enter') || (input.getTouchEnd() || GameManager.getInstance().isMobile))
         {
             input.clearTouch();
             SceneManager.getInstance().loadScene(1);
+        }
+        if(input.getTouchEnd())
+        {
+            GameManager.getInstance().isMobile = true;
+            input.clearTouch();
         }
     }
     render(): void {
