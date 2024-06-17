@@ -1,4 +1,6 @@
+import { doc } from "prettier";
 import { Input } from "../input/Input";
+import { AudioManager } from "../manager/AudioManager";
 import { GameManager } from "../manager/GameManager";
 import { Scene } from "./Scene";
 import { SceneManager } from "./SceneManager";
@@ -15,12 +17,12 @@ export class MenuScene extends Scene
     update(deltaTime: number, input: Input): void {
         super.update(deltaTime, input);
         console.log('Menu Scene');
-        if(input.isKeyPressed('Enter') || (input.getTouchEnd() || GameManager.getInstance().isMobile))
+        if(input.isKeyPressed('Enter') || (input.getTouchStart() || GameManager.getInstance().isMobile) && document.hasFocus())
         {
             input.clearTouch();
             SceneManager.getInstance().loadScene(1);
         }
-        if(input.getTouchEnd())
+        else if(input.getTouchEnd() && document.hasFocus())
         {
             GameManager.getInstance().isMobile = true;
             input.clearTouch();

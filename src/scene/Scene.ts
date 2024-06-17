@@ -1,6 +1,6 @@
 import { GameObject } from "../game-object/GameObject";
 import { Input } from "../input/Input";
-import { Renderer } from "../Renderer";
+import { Renderer } from "../components/Renderer";
 
 export abstract class Scene {
     protected _canvas: HTMLCanvasElement;

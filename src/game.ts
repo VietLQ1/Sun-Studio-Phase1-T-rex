@@ -1,7 +1,7 @@
 import { SpriteRenderer } from './components/SpriteRenderer';
 import { Input } from './input/Input';
 import { GameObject } from './game-object/GameObject';
-import { Renderer } from './Renderer';
+import { Renderer } from './components/Renderer';
 import { Cactus } from './game-object/Cactus';
 import { Bird } from './game-object/Bird';
 import { Player } from './game-object/Player';
