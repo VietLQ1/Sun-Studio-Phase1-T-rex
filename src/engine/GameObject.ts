@@ -11,12 +11,12 @@ export abstract class GameObject {
     protected _height: number;
     collider: Collider;
     spriteRenderer: SpriteRenderer;
-    constructor() {
-        this.position = [0, 0, 0];
+    
+    constructor(x: number = 0, y: number = 0) {
+        this.position = [x, y, 0];
         this.rotation = [0, 0, 0];
         this.scale = [1, 1, 1];
     }
-    
     abstract update(deltaTime: number, input: Input): void;
     abstract render(): void;
     abstract onCollisionEnter(other: GameObject): void;

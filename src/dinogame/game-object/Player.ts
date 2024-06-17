@@ -47,7 +47,6 @@ export class Player extends GameObject {
             this._isDuck = true;
             this._height = 100 * window.innerHeight / 1080;
             this.position[1] = window.innerHeight - this._height;
-            input.clearTouch();
         }
         else if (this._rigidbody.isGrounded) 
         {
