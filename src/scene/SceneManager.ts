@@ -11,11 +11,12 @@ export class SceneManager{
         this._scenes.push(scene);
     }
     public loadScene(index: number): void {
+        this._scenes[index].onSceneLoad();
         this._currentScene?.onSceneUnload();
         this._currentScene = this._scenes[index];
-        this._currentScene.onSceneLoad();
     }
     public get currentScene(): Scene {
+        //console.log(this._scenes.length);
         return this._currentScene;
     }
     public static getInstance() {
