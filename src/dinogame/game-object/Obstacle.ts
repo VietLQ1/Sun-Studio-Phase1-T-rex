@@ -4,8 +4,6 @@ import { ScoreManager } from "../../engine/manager/ScoreManager";
 
 export abstract class Obstacle extends GameObject {
     protected _speed: number;
-    protected _width: number;
-    protected _height: number;
     protected _spawnInterval: number;
     constructor() {
         super();

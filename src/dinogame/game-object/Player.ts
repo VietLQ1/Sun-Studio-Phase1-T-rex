@@ -7,16 +7,17 @@ import { NormalState } from '../animation/NormalState';
 import { Animator } from '../../engine/components/Animator';
 import { CollidedState } from '../animation/CollidedState';
 import { AudioManager } from '../../engine/manager/AudioManager';
+import { RigidBody } from '../../engine/components/Rigidbody';
 export class Player extends GameObject {
 
     private _animator = new Animator();
     private _isDuck = false;
-    private _width = 160 * window.innerHeight / 1080;
-    private _height = 200 * window.innerHeight / 1080;
-    private _isOnGround = true;
     private _jumpForce = 1500 * window.innerHeight / 1080;
+    private _rigidbody = new RigidBody(this, true);
     constructor() {
         super();
+        this._width = 160 * window.innerHeight / 1080;
+        this._height = 200 * window.innerHeight / 1080;
         this._tag = 'player';
         this.position[0] = window.innerWidth / 5 - this._width / 2;
         this.position[1] = window.innerHeight - this._height;
@@ -33,29 +34,18 @@ export class Player extends GameObject {
     }
     public update(deltaTime : number, input : Input) {
         let touch = input.getTouchStart();
-        if ((input.isKeyPressed('KeyW') || input.isKeyPressed('Space') || (touch && touch.x > window.innerWidth/2))&& this._isOnGround && !this._isDuck) {
-            this._isOnGround = false;
-            this._jumpForce = 1500 * window.innerHeight / 1080;
+        if ((input.isKeyPressed('KeyW') || input.isKeyPressed('Space') || (touch && touch.x > window.innerWidth/2))&& this._rigidbody.isGrounded && !this._isDuck) {
+            this._rigidbody.applyForce([0, this._jumpForce]);
             AudioManager.getInstance().getAudioClip('jump')?.play();
             input.clearTouch();
-            //this._isJumping = true;
         }
-        if (!this._isOnGround) {
-                this.position[1] -= this._jumpForce * deltaTime;
-                this._jumpForce -= 4900 * (window.innerHeight / 1080) * deltaTime;
-                input.clearTouch();
-
-            if (this.position[1] >= window.innerHeight - this._height) {
-                this.position[1] = window.innerHeight - this._height;
-                this._isOnGround = true;
-            }
-        }
-        if ((input.isKeyPressed('KeyS') || (touch && touch.x < window.innerWidth / 2 && input.getTouchEnd() == null)) && this._isOnGround) {
+        this._rigidbody.update(deltaTime);
+        if ((input.isKeyPressed('KeyS') || (touch && touch.x < window.innerWidth / 2 && input.getTouchEnd() == null)) && this._rigidbody.isGrounded) {
             this._isDuck = true;
             this._height = 100 * window.innerHeight / 1080;
             this.position[1] = window.innerHeight - this._height;
         }
-        else if (this._isOnGround) 
+        else if (this._rigidbody.isGrounded) 
         {
             input.clearTouch();
             this._height = 200 * window.innerHeight / 1080;

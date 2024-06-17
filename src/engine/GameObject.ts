@@ -7,6 +7,8 @@ export abstract class GameObject {
     rotation: [number, number, number];
     scale: [number, number, number];
     protected _tag: string;
+    protected _width: number;
+    protected _height: number;
     collider: Collider;
     spriteRenderer: SpriteRenderer;
     constructor() {
@@ -20,5 +22,11 @@ export abstract class GameObject {
     abstract onCollisionEnter(other: GameObject): void;
     get tag(): string {
         return this._tag;
+    }
+    get width(): number {
+        return this._width;
+    }
+    get height(): number {
+        return this._height;
     }
 }
