@@ -1,4 +1,4 @@
-import { GameObject } from "../game-object/GameObject";
+import { GameObject } from "../GameObject";
 import { Scene } from "../scene/Scene";
 import { SceneManager } from "../scene/SceneManager";
 

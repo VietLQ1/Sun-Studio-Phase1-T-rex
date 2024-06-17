@@ -1,19 +1,13 @@
-import { SpriteRenderer } from './components/SpriteRenderer';
-import { Input } from './input/Input';
-import { GameObject } from './game-object/GameObject';
-import { Renderer } from './components/Renderer';
-import { Cactus } from './game-object/Cactus';
-import { Bird } from './game-object/Bird';
-import { Player } from './game-object/Player';
-import { AudioManager } from './manager/AudioManager';
-import { ScoreManager } from './manager/ScoreManager';
-import { GameManager } from './manager/GameManager';
-import { Scene } from './scene/Scene';
-import { SceneManager } from './scene/SceneManager';
-import { MenuScene } from './scene/MenuScene';
-import { PlayScene } from './scene/PlayScene';
-import { GameOverScene } from './scene/GameOverScene';
-import { CollisionManager } from './manager/CollisionManager';
+import { SpriteRenderer } from './engine/components/SpriteRenderer';
+import { Input } from './engine/input/Input';
+import { Renderer } from './engine/components/Renderer';
+import { AudioManager } from './engine/manager/AudioManager';
+import { SceneManager } from './engine/scene/SceneManager';
+import { MenuScene } from './dinogame/scene/MenuScene';
+import { PlayScene } from './dinogame/scene/PlayScene';
+import { GameOverScene } from './dinogame/scene/GameOverScene';
+import { CollisionManager } from './engine/manager/CollisionManager';
+import { Game } from './engine/Game';
 
 
 enum GameState {'READY', 'PLAYING', 'GAMEOVER'};
@@ -22,44 +16,19 @@ const canvas = document.createElement('canvas') as HTMLCanvasElement;
 
 document.body.appendChild(canvas);
 const spriteRenderer = new SpriteRenderer('assets/images/phaser-logo.png');
-export class Game {
-    private _platform : Platform;
-    private _gameState : GameState;
-    private _delay : number;
-    private _touched : boolean;
-    renderer = new Renderer(canvas);
-    input: Input;
-    lastFrameTime: number;
-    private _audioManager = AudioManager.getInstance();
-    constructor() {
-        this._touched = false;
-        this._platform = Platform.PC;
-        console.log('Game created')
-        this.renderer = new Renderer(canvas);
-        this.input = new Input();
-        this.lastFrameTime = 0;
-        this._audioManager.addAudioClip('bgm', 'assets/audios/BGM.wav');
-    }
-    public start(currentTime: number) {
+
+class DinoGame extends Game
+{
+    public start(currentTime: number): void {
         SceneManager.getInstance().addScene(new MenuScene(this.renderer, canvas));
         SceneManager.getInstance().addScene(new PlayScene(this.renderer, canvas));
         SceneManager.getInstance().addScene(new GameOverScene(this.renderer, canvas));
         SceneManager.getInstance().loadScene(0);
-        requestAnimationFrame((timestamp) => this.gameLoop(timestamp));
-        }
-    private gameLoop(currentTime: number) {
-        const deltaTime = (currentTime - this.lastFrameTime) / 1000;
-        this.lastFrameTime = currentTime;
-        let currentScene = SceneManager.getInstance().currentScene;
-        currentScene.update(deltaTime, this.input);
-        CollisionManager.getInstance().checkCollisions(currentScene);
-        currentScene.render();
-        requestAnimationFrame((timestamp) => this.gameLoop(timestamp));
+        super.start(currentTime);
     }
 }
 
-
-let game = new Game()
+let game = new DinoGame(canvas);
 game.start(0);
 
 

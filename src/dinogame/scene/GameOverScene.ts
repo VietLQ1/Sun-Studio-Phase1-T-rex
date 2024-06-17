@@ -1,9 +1,9 @@
-import { GameObject } from "../game-object/GameObject";
-import { Input } from "../input/Input";
+import { GameObject } from "../../engine/GameObject";
+import { Input } from "../../engine/input/Input";
 import { GameManager } from "../manager/GameManager";
-import { ScoreManager } from "../manager/ScoreManager";
-import { Scene } from "./Scene";
-import { SceneManager } from "./SceneManager";
+import { ScoreManager } from "../../engine/manager/ScoreManager";
+import { Scene } from "../../engine/scene/Scene";
+import { SceneManager } from "../../engine/scene/SceneManager";
 
 export class GameOverScene extends Scene {
     public onSceneLoad(): void {

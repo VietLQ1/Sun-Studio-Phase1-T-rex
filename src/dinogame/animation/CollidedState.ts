@@ -1,19 +1,14 @@
-import { State } from '../components/State';
-import { SpriteRenderer } from '../components/SpriteRenderer';
-export class NormalState implements State {
+import { State } from '../../engine/components/State';
+import { SpriteRenderer } from '../../engine/components/SpriteRenderer';
+export class CollidedState implements State {
     private _sprites : SpriteRenderer[];
     private _currentSprite : number;
     constructor() {
         this._sprites = [];
         this._currentSprite = 0;
+        this._sprites.push(new SpriteRenderer('assets/images/seiba_hurt.png'))
     }
     public update(frame: number) {
-        if (frame % 10 == 0) {
-            this._currentSprite++;
-            if (this._currentSprite >= this._sprites.length) {
-                this._currentSprite = 0;
-            }
-        }
         //console.log(this._currentSprite);
     }
     public render(x: number, y: number, width: number, height: number) {

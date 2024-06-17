@@ -1,4 +1,4 @@
-import { GameObject } from "../game-object/GameObject";
+import { GameObject } from "../GameObject";
 import { Input } from "../input/Input";
 import { Renderer } from "../components/Renderer";
 

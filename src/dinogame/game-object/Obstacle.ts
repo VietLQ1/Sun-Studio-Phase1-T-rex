@@ -1,6 +1,6 @@
-import { GameObject } from "./GameObject";
-import { Input } from "../input/Input";
-import { ScoreManager } from "../manager/ScoreManager";
+import { GameObject } from "../../engine/GameObject";
+import { Input } from "../../engine/input/Input";
+import { ScoreManager } from "../../engine/manager/ScoreManager";
 
 export abstract class Obstacle extends GameObject {
     protected _speed: number;

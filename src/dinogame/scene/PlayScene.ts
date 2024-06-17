@@ -1,9 +1,9 @@
 import { Bird } from "../game-object/Bird";
 import { Cactus } from "../game-object/Cactus";
 import { Player } from "../game-object/Player";
-import { Input } from "../input/Input";
-import { ScoreManager } from "../manager/ScoreManager";
-import { Scene } from "./Scene";
+import { Input } from "../../engine/input/Input";
+import { ScoreManager } from "../../engine/manager/ScoreManager";
+import { Scene } from "../../engine/scene/Scene";
 
 export class PlayScene extends Scene
 {

@@ -1,9 +1,9 @@
 import { doc } from "prettier";
-import { Input } from "../input/Input";
-import { AudioManager } from "../manager/AudioManager";
+import { Input } from "../../engine/input/Input";
+import { AudioManager } from "../../engine/manager/AudioManager";
 import { GameManager } from "../manager/GameManager";
-import { Scene } from "./Scene";
-import { SceneManager } from "./SceneManager";
+import { Scene } from "../../engine/scene/Scene";
+import { SceneManager } from "../../engine/scene/SceneManager";
 
 export class MenuScene extends Scene
 {
@@ -16,7 +16,7 @@ export class MenuScene extends Scene
     }
     update(deltaTime: number, input: Input): void {
         super.update(deltaTime, input);
-        console.log('Menu Scene');
+        // console.log('Menu Scene');
         if(input.isKeyPressed('Enter') || (input.getTouchStart() || GameManager.getInstance().isMobile) && document.hasFocus())
         {
             input.clearTouch();

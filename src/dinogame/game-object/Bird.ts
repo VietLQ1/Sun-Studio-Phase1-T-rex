@@ -1,10 +1,10 @@
 import { Obstacle} from "./Obstacle";
-import { Collider } from "../components/Collider";
-import { SpriteRenderer } from "../components/SpriteRenderer";
-import { GameObject } from "./GameObject";
-import { Animator } from "../components/Animator";
+import { Collider } from "../../engine/components/Collider";
+import { SpriteRenderer } from "../../engine/components/SpriteRenderer";
+import { GameObject } from "../../engine/GameObject";
+import { Animator } from "../../engine/components/Animator";
 import { NormalState } from "../animation/NormalState";
-import { Input } from "../input/Input";
+import { Input } from "../../engine/input/Input";
 export class Bird extends Obstacle
 {
     private _animator : Animator;
