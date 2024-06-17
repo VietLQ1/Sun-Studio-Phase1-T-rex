@@ -4,9 +4,13 @@ export class GameManager {
     private _menuText: string;
     private _gameOverText: string;
     private constructor() {
-        this._isMobile = false;
+        window.navigator.userAgent.match(/Mobile/) || window.navigator.userAgent.match(/Tablet/) ? this._isMobile = true : this._isMobile = false;
         this._menuText = "Press Enter to Start";
-        this._gameOverText = "Game Over! Press Enter to Restart or ESC to go back to Menu";
+        this._gameOverText = "Press Enter to Restart or ESC to go back to Menu";
+        if (this._isMobile){
+            this._menuText = "Tap to Start";
+            this._gameOverText = "Tap to Restart";
+        }
     }
     public static getInstance() {
         if (!this._instance) {
@@ -16,13 +20,13 @@ export class GameManager {
     }
     public get isMobile() {
         return this._isMobile;
+        
     }
     public set isMobile(value: boolean) {
         this._isMobile = value;
-        this._menuText = "Tap to Start";
-        this._gameOverText = "Game Over!Tap to Restart";
     }
     public get menuText() {
+        console.log(this._isMobile);
         return this._menuText;
     }
     public get gameOverText() {

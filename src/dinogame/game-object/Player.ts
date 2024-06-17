@@ -39,6 +39,7 @@ export class Player extends GameObject {
             AudioManager.getInstance().getAudioClip('jump')?.play();
             input.clearTouch();
         }
+        
         this._rigidbody.update(deltaTime);
         if ((input.isKeyPressed('KeyS') || (touch && touch.x < window.innerWidth / 2 && input.getTouchEnd() == null)) && this._rigidbody.isGrounded) {
             this._isDuck = true;
