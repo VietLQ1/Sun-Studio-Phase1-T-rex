@@ -10,7 +10,7 @@ import { AudioManager } from '../manager/AudioManager';
 export class Player extends GameObject {
 
     private _animator = new Animator();
-    private _speed = 500;
+    private _isDuck = false;
     private _width = 160 * window.innerHeight / 1080;
     private _height = 200 * window.innerHeight / 1080;
     private _isOnGround = true;
@@ -34,7 +34,7 @@ export class Player extends GameObject {
     }
     public update(deltaTime : number, input : Input) {
         let touch = input.getTouchStart();
-        if ((input.isKeyPressed('KeyW') || input.isKeyPressed('Space') || (touch && touch.x > window.innerWidth/2))&& this._isOnGround) {
+        if ((input.isKeyPressed('KeyW') || input.isKeyPressed('Space') || (touch && touch.x > window.innerWidth/2))&& this._isOnGround && !this._isDuck) {
             this._isOnGround = false;
             this._jumpForce = 1500 * window.innerHeight / 1080;
             AudioManager.getInstance().getAudioClip('jump')?.play();
@@ -52,6 +52,7 @@ export class Player extends GameObject {
             }
         }
         if ((input.isKeyPressed('KeyS') || (touch && touch.x < window.innerWidth / 2 && input.getTouchEnd() == null)) && this._isOnGround) {
+            this._isDuck = true;
             this._height = 100 * window.innerHeight / 1080;
             this.position[1] = window.innerHeight - this._height;
         }
@@ -60,6 +61,7 @@ export class Player extends GameObject {
             input.clearTouch();
             this._height = 200 * window.innerHeight / 1080;
             this.position[1] = window.innerHeight - this._height;
+            this._isDuck = false;
         }
         // if (input.isKeyPressed('KeyA')) {
         //     this.position[0] -= this._speed * deltaTime;
