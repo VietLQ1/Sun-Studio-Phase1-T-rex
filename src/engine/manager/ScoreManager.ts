@@ -22,7 +22,7 @@ export class ScoreManager {
         this._playerScore = 0;
     }
     public increaseScore(deltaTime : number) {
-        this._playerScore += deltaTime;
+        this._playerScore += deltaTime * 10;
         if (this._playerScore > this._highScore) {
             this._highScore = this._playerScore;
             localStorage.setItem('highScore', this._highScore.toString());

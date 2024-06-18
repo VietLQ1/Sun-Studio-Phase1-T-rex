@@ -7,7 +7,7 @@ export class StartButton extends Button
     constructor()
     {
         console.log(window.innerWidth/2, window.innerHeight/2);
-        super(1100, 480, 200, 100,'Start Game', true, 30, 'Arial', 'blue', 'red');
+        super(1100, 480, 200, 100,'Start Game', true, 30, 'Arial', 'blue', 'orange');
     }
     public update(deltaTime: number, input: Input): void {
         super.update(deltaTime, input);

@@ -5,6 +5,7 @@ import { Input } from "../../engine/input/Input";
 import { ScoreManager } from "../../engine/manager/ScoreManager";
 import { Scene } from "../../engine/scene/Scene";
 import { SceneManager } from "../../engine/scene/SceneManager";
+import { GroundBird } from "../game-object/GroundBird";
 
 export class PlayScene extends Scene
 {
@@ -21,8 +22,11 @@ export class PlayScene extends Scene
         super.update(deltaTime, input);
         if (this.gameObjects.length == 1 || (this._gameObjects[1].position[0] <= window.innerWidth/3 && this.gameObjects.length < 3)) {
             let random = Math.random();
-            if (random < 0.75) {
+            if (random < 0.5) {
                 this.addGameObject(new Cactus());
+            }
+            else if (random < 0.7) {
+                this.addGameObject(new GroundBird());
             }
             else {
                 this.addGameObject(new Bird());
