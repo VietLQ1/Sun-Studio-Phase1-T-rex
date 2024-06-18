@@ -3,6 +3,7 @@ export class GameManager {
     private _isMobile: boolean;
     private _menuText: string;
     private _gameOverText: string;
+    private _isReady : boolean;
     private constructor() {
         window.navigator.userAgent.match(/Mobile/) || window.navigator.userAgent.match(/Tablet/) ? this._isMobile = true : this._isMobile = false;
         this._menuText = "Press Button to Start";
@@ -11,6 +12,7 @@ export class GameManager {
             this._menuText = "Tap Start Game";
             this._gameOverText = "Tap Restart";
         }
+        this._isReady = false;
     }
     public static getInstance() {
         if (!this._instance) {
@@ -30,6 +32,12 @@ export class GameManager {
     }
     public get gameOverText() {
         return this._gameOverText;
+    }
+    public get isReady() {
+        return this._isReady;
+    }
+    public set isReady(value: boolean) {
+        this._isReady = value;
     }
 }
 
