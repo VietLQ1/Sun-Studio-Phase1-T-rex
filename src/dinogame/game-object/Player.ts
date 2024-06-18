@@ -13,6 +13,7 @@ export class Player extends AnimatedObject {
     private _isDuck = false;
     private _jumpForce = 1500 * window.innerHeight / 1080;
     private _rigidbody = new RigidBody(this, true);
+    private _alive = true;
     constructor() {
         super();
         this._width = 160 * window.innerHeight / 1080;
@@ -30,6 +31,9 @@ export class Player extends AnimatedObject {
         this._animator.addSprite(new SpriteRenderer('assets/images/seiba_walking_3.png'));
     }
     public update(deltaTime : number, input : Input) {
+        if (!this._alive) {
+            return;
+        }
         let touch = input.getTouchStart();
         if ((input.isKeyPressed('KeyW') || input.isKeyPressed('Space') || (touch && touch.x > window.innerWidth/2))&& this._rigidbody.isGrounded && !this._isDuck) {
             this._rigidbody.applyForce([0, this._jumpForce]);
@@ -66,5 +70,6 @@ export class Player extends AnimatedObject {
             SceneManager.getInstance().loadScene(2);
         }
         AudioManager.getInstance().getAudioClip('collide')?.play();
+        this._alive = false;
     }
 }

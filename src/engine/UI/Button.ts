@@ -1,3 +1,4 @@
+import { Collider } from "../components/Collider";
 import { GameObject } from "../game-object/GameObject";
 import { Input } from "../input/Input";
 
@@ -14,6 +15,7 @@ export class Button extends GameObject
     public constructor(x: number, y: number, width: number, height: number, text: string, isBold: boolean, fontSize: number, font: string, color: string, backgroundColor: string)
     {
         super(window.innerWidth - x * window.innerWidth/1920, window.innerHeight - y * window.innerHeight/1080);
+        this.collider = new Collider(this.position[0], this.position[1], 0, 0);
         this._x = x;
         this._y = y;
         this._width = width
@@ -74,5 +76,9 @@ export class Button extends GameObject
     }
     public onButtonClicked(): void
     {
+    }
+    public set text(value: string)
+    {
+        this._text = value;
     }
 }

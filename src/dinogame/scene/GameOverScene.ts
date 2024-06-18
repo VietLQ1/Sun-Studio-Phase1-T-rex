@@ -3,6 +3,7 @@ import { GameManager } from "../manager/GameManager";
 import { ScoreManager } from "../../engine/manager/ScoreManager";
 import { Scene } from "../../engine/scene/Scene";
 import { SceneManager } from "../../engine/scene/SceneManager";
+import { RestartButton } from "../UI/RestartButton";
 
 export class GameOverScene extends Scene {
     public onSceneLoad(): void {
@@ -10,11 +11,16 @@ export class GameOverScene extends Scene {
         this.addGameObject(SceneManager.getInstance().currentScene.gameObjects[0]);
     }
     public onSceneUnload(): void {
+        this._delay = 0;
         this._gameObjects = [];
     }
     public update(deltaTime: number , input: Input): void {
-        //super.update(deltaTime, input);
+        super.update(deltaTime, input);
         this._delay += deltaTime*10;
+        if(this._delay > 10)
+        {
+            this.addGameObject(new RestartButton());
+        }
         if(this._delay > 10 && (input.isKeyPressed('Enter') || input.getTouchEnd()))
         {
             this._delay = 0;
@@ -39,6 +45,7 @@ export class GameOverScene extends Scene {
             return;
         }
         localStorage.setItem('highScore', ScoreManager.getInstance().highScore.toString());
+        ctx.fillStyle = 'black';
         ctx.font = 'bold 50px Arial';
         ctx.textAlign = 'center';
         ctx.textBaseline = 'middle';
