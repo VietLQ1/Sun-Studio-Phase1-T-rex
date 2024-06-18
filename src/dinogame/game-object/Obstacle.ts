@@ -1,8 +1,9 @@
+import { AnimatedObject } from "../../engine/game-object/AnimatedObject";
 import { GameObject } from "../../engine/game-object/GameObject";
 import { Input } from "../../engine/input/Input";
 import { ScoreManager } from "../../engine/manager/ScoreManager";
 
-export abstract class Obstacle extends GameObject {
+export abstract class Obstacle extends AnimatedObject {
     protected _speed: number;
     protected _spawnInterval: number;
     constructor() {
@@ -17,8 +18,10 @@ export abstract class Obstacle extends GameObject {
         // if (this.position[0] < -this._width) {
         //     this.position[0] = window.innerWidth + Math.random() * 1000 * this._spawnInterval;;
         // }
+        super.update(deltaTime, input);
     }
     public render() {
+        super.render();
     }
     public onCollisionEnter(other: GameObject): void {
     }

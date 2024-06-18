@@ -3,14 +3,13 @@ import { Collider } from '../../engine/components/Collider';
 import { SpriteRenderer } from '../../engine/components/SpriteRenderer';
 import { Input } from '../../engine/input/Input';
 import { NormalState } from '../animation/NormalState';
-import { Animator } from '../../engine/components/Animator';
 import { CollidedState } from '../animation/CollidedState';
 import { AudioManager } from '../../engine/manager/AudioManager';
 import { RigidBody } from '../../engine/components/Rigidbody';
 import { SceneManager } from '../../engine/scene/SceneManager';
-export class Player extends GameObject {
+import { AnimatedObject } from '../../engine/game-object/AnimatedObject';
+export class Player extends AnimatedObject {
 
-    private _animator = new Animator();
     private _isDuck = false;
     private _jumpForce = 1500 * window.innerHeight / 1080;
     private _rigidbody = new RigidBody(this, true);
@@ -23,11 +22,9 @@ export class Player extends GameObject {
         this.position[1] = window.innerHeight - this._height;
         AudioManager.getInstance().addAudioClip('jump', 'assets/audios/jump.wav');
         AudioManager.getInstance().addAudioClip('collide', 'assets/audios/collide.wav');
-        this._animator = new Animator();
         this._animator.setState(new NormalState());
         this.collider = new Collider(this.position[0], this.position[1], this._width , this._height);
-        this.spriteRenderer = new SpriteRenderer('assets/images/seiba_walking_0.png');
-        this._animator.addSprite(this.spriteRenderer);
+        this._animator.addSprite(new SpriteRenderer('assets/images/seiba_walking_0.png'));
         this._animator.addSprite(new SpriteRenderer('assets/images/seiba_walking_1.png'));
         this._animator.addSprite(new SpriteRenderer('assets/images/seiba_walking_2.png'));
         this._animator.addSprite(new SpriteRenderer('assets/images/seiba_walking_3.png'));
@@ -57,11 +54,10 @@ export class Player extends GameObject {
         this.collider.x = this.position[0];
         this.collider.y = this.position[1];
         this.collider.height = this._height;
-        this._animator.update(deltaTime);
-        //console.log(this.collider.x, this.collider.y, this.collider.width, this.collider.height);
+        super.update(deltaTime, input);
     }
     public render() {
-        this._animator.render(this.position[0], this.position[1], this._width, this._height);
+        super.render();
     }
     public onCollisionEnter(other: GameObject): void {
         this._animator.setState(new CollidedState());
