@@ -19,21 +19,11 @@ export class PlayScene extends Scene
         this.addGameObject(new BGDragon())
         this.addGameObject(new Cactus())
         this._renderer.clear();
-        GameManager.getInstance().isReady = false;
     }
     public onSceneUnload(): void {
         this._gameObjects = [];
     }
     public update(deltaTime: number, input: Input): void {
-        if(!GameManager.getInstance().isReady)
-        {
-            this._delay += deltaTime;
-            if(this._delay > 100)
-            {
-                GameManager.getInstance().isReady = true;
-            }
-            return;
-        }
         super.update(deltaTime, input);
         if (this.gameObjects.length == 2 || (this._gameObjects[2].position[0] <= window.innerWidth/3 && this.gameObjects.length < 4)) {
             let random = Math.random();
