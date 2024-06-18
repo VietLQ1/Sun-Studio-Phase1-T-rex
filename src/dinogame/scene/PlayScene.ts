@@ -39,7 +39,7 @@ export class PlayScene extends Scene
         }
         if(!document.hasFocus())
         {
-            SceneManager.getInstance().loadScene(2);
+            ScoreManager.getInstance().resetScore();
         }
         ScoreManager.getInstance().increaseScore(deltaTime);   
     }
