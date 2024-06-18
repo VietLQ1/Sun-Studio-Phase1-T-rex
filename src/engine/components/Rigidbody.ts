@@ -1,4 +1,4 @@
-import { GameObject } from "../GameObject";
+import { GameObject } from "../game-object/GameObject";
 
 export class RigidBody{
     private _gameObject: GameObject;

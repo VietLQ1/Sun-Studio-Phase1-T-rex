@@ -1,4 +1,4 @@
-import { GameObject } from "../GameObject";
+import { GameObject } from "../game-object/GameObject";
 import { Scene } from "../scene/Scene";
 
 export class CollisionManager {

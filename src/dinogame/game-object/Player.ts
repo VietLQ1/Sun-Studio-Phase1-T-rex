@@ -1,4 +1,4 @@
-import { GameObject } from '../../engine/GameObject';
+import { GameObject } from '../../engine/game-object/GameObject';
 import { Collider } from '../../engine/components/Collider';
 import { SpriteRenderer } from '../../engine/components/SpriteRenderer';
 import { Input } from '../../engine/input/Input';
@@ -8,7 +8,6 @@ import { CollidedState } from '../animation/CollidedState';
 import { AudioManager } from '../../engine/manager/AudioManager';
 import { RigidBody } from '../../engine/components/Rigidbody';
 import { SceneManager } from '../../engine/scene/SceneManager';
-import { GameManager } from '../manager/GameManager';
 export class Player extends GameObject {
 
     private _animator = new Animator();

@@ -1,4 +1,4 @@
-import { GameObject } from "../GameObject";
+import { GameObject } from "../game-object/GameObject";
 import { Input } from "../input/Input";
 
 export class Button extends GameObject
