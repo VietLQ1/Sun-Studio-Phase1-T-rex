@@ -1,3 +1,5 @@
+import { Scene } from "../scene/Scene";
+
 export class Renderer {
     canvas: HTMLCanvasElement;
     BG : HTMLImageElement;
@@ -5,7 +7,6 @@ export class Renderer {
     constructor(canvas : HTMLCanvasElement) {
         this.canvas = canvas;
         this.BG = new Image();
-        this.BG.src = 'assets/images/BG.png';
         this.resizeCanvas();
         window.addEventListener('resize', () => this.resizeCanvas());
     }
@@ -15,7 +16,13 @@ export class Renderer {
         this.canvas.height = window.innerHeight;
         
     }
-
+    public render(gameScene : Scene)
+    {
+        gameScene.render();
+    }
+    public setBG(path : string) {
+        this.BG.src = path;
+    }
     public clear() {
         this.canvas.getContext('2d')?.clearRect(0, 0, this.canvas.width, this.canvas.height);
         this.canvas.getContext('2d')?.drawImage(this.BG, this.BGX, 0, this.canvas.width, this.canvas.height);

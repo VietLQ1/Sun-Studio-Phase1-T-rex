@@ -19,6 +19,7 @@ class DinoGame extends Game
         SceneManager.getInstance().addScene(new GameOverScene(this.renderer, canvas));
         SceneManager.getInstance().loadScene(0);
         super.start(currentTime);
+        this.renderer.setBG('assets/images/BG.png');
     }
 }
 

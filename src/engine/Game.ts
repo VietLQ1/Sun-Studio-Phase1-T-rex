@@ -8,7 +8,6 @@ export class Game {
     renderer : Renderer;
     input: Input;
     lastFrameTime: number;
-    private _audioManager = AudioManager.getInstance();
     constructor(canvas: HTMLCanvasElement) {
         console.log('Game created')
         this.renderer = new Renderer(canvas);
@@ -25,7 +24,7 @@ export class Game {
         let currentScene = SceneManager.getInstance().currentScene;
         currentScene.update(deltaTime, this.input);
         CollisionManager.getInstance().checkCollisions(currentScene);
-        currentScene.render();
+        this.renderer.render(currentScene);
         requestAnimationFrame((timestamp) => this.gameLoop(timestamp));
     }
 }
