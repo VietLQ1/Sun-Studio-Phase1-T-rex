@@ -3,14 +3,14 @@ import { Collider } from "../components/Collider";
 import { SpriteRenderer } from "../components/SpriteRenderer";
 
 export abstract class GameObject {
-    position: [number, number, number];
-    rotation: [number, number, number];
-    scale: [number, number, number];
+    public position: [number, number, number];
+    public rotation: [number, number, number];
+    public scale: [number, number, number];
     protected _tag: string;
     protected _width: number;
     protected _height: number;
-    collider: Collider;
-    spriteRenderer: SpriteRenderer;
+    public collider: Collider;
+    public spriteRenderer: SpriteRenderer;
     
     constructor(x: number = 0, y: number = 0) {
         this.position = [x, y, 0];

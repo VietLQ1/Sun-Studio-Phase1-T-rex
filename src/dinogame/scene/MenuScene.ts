@@ -6,15 +6,15 @@ import { StartButton } from "../UI/StartButton";
 
 export class MenuScene extends Scene
 {
-    onSceneLoad(): void {
+    public onSceneLoad(): void {
         this._gameObjects = [];
         this._renderer.clear();
         this.addGameObject(new StartButton());
     }
-    onSceneUnload(): void {
+    public onSceneUnload(): void {
         
     }
-    update(deltaTime: number, input: Input): void {
+    public update(deltaTime: number, input: Input): void {
         super.update(deltaTime, input);
         // console.log('Menu Scene');
         if(input.getTouchStart() && GameManager.getInstance().isMobile && document.hasFocus())
@@ -28,7 +28,7 @@ export class MenuScene extends Scene
             input.clearTouch();
         }
     }
-    render(): void {
+    public render(): void {
         super.render();
         var ctx = this._canvas.getContext('2d');
         if(!ctx)

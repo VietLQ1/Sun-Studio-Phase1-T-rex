@@ -16,10 +16,10 @@ export class Cactus extends Obstacle
         this._animator.setState(new NormalState());
         this._animator.addSprite(new SpriteRenderer('assets/images/pixel_cactus.png'));
     }
-    update(deltaTime: number, input: Input): void {
+    public update(deltaTime: number, input: Input): void {
         super.update(deltaTime, input);
     }
-    render() {
+    public render() {
         super.render();
     }
     public onCollisionEnter(other: GameObject): void {

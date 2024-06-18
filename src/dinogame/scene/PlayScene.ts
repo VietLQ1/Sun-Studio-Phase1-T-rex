@@ -9,16 +9,16 @@ import { GroundBird } from "../game-object/GroundBird";
 
 export class PlayScene extends Scene
 {
-    onSceneLoad(): void {
+    public onSceneLoad(): void {
         ScoreManager.getInstance().resetScore();
         this.addGameObject(new Player())
         this.addGameObject(new Cactus())
         this._renderer.clear();
     }
-    onSceneUnload(): void {
+    public onSceneUnload(): void {
         this._gameObjects = [];
     }
-    update(deltaTime: number, input: Input): void {
+    public update(deltaTime: number, input: Input): void {
         super.update(deltaTime, input);
         if (this.gameObjects.length == 1 || (this._gameObjects[1].position[0] <= window.innerWidth/3 && this.gameObjects.length < 3)) {
             let random = Math.random();
@@ -46,7 +46,7 @@ export class PlayScene extends Scene
             ScoreManager.getInstance().increaseScore(deltaTime);   
         }
     }
-    render(): void {
+    public render(): void {
         super.render();
         var ctx = this._canvas.getContext('2d');
         if(!ctx)

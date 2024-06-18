@@ -9,12 +9,12 @@ export class SpriteObject extends GameObject
         super();
         this.spriteRenderer = new SpriteRenderer(spritePath);
     }
-    update(deltaTime: number, input: Input): void {
+    public update(deltaTime: number, input: Input): void {
     }
-    render(): void {
+    public render(): void {
         this.spriteRenderer.render(this.position[0], this.position[1], this._width, this._height);
     }
-    onCollisionEnter(other: GameObject): void {
+    public onCollisionEnter(other: GameObject): void {
         
     }
 }

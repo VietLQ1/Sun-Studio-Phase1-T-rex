@@ -10,13 +10,13 @@ export class AnimatedObject extends GameObject
         super();
         this._animator = new Animator();
     }
-    update(deltaTime: number, input: Input): void {
+    public update(deltaTime: number, input: Input): void {
         this._animator.update(deltaTime);
     }
-    render(): void {
+    public render(): void {
         this._animator.render(this.position[0], this.position[1], this._width, this._height);
     }
-    onCollisionEnter(other: GameObject): void {
+    public onCollisionEnter(other: GameObject): void {
         
     }
 }

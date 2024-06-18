@@ -15,19 +15,19 @@ export class Input {
         window.addEventListener('click', (e) => this.handleMouseClick(e));
     }
 
-    handleTouchStart(e: TouchEvent) {
+    private handleTouchStart(e: TouchEvent) {
         this.touchStart = { x: e.touches[0].clientX, y: e.touches[0].clientY };
         //console.log(this.touchStart.x, this.touchStart.y);
     }
 
-    handleTouchEnd(e: TouchEvent) {
+    private handleTouchEnd(e: TouchEvent) {
         if (e.changedTouches && e.changedTouches[0]) {
             this.touchEnd = { x: e.changedTouches[0].clientX, y: e.changedTouches[0].clientY };
             //console.log(this.touchEnd.x, this.touchEnd.y);
         }
     }
 
-    handleMouseClick(e: MouseEvent) {
+    private handleMouseClick(e: MouseEvent) {
         this.lastClick = { x: e.clientX, y: e.clientY };
         // Optionally, you can immediately check if this click is within a specific position.
     }
