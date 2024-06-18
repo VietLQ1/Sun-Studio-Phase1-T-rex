@@ -24,7 +24,7 @@ export class GameOverScene extends Scene {
         }
         if(this._delay > 10 && input.isKeyPressed('Escape'))
         {
-            console.log('Escape Pressed');
+            // console.log('Escape Pressed');
             this._delay = 0;
             SceneManager.getInstance().loadScene(0);
         }
