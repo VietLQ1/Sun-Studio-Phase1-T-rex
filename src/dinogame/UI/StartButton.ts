@@ -6,13 +6,11 @@ export class StartButton extends Button
 {
     constructor()
     {
-        super(window.innerWidth / 2 - 100, window.innerHeight / 2 + 100, 200, 100,'Start Game', true, 30, 'Arial', 'blue', 'red');
+        console.log(window.innerWidth/2, window.innerHeight/2);
+        super(1100, 480, 200, 100,'Start Game', true, 30, 'Arial', 'blue', 'red');
     }
     public update(deltaTime: number, input: Input): void {
-        if(document.hasFocus())
-        {
-            super.update(deltaTime, input);
-        }
+        super.update(deltaTime, input);
         input.clearTouch();
     }
     public render(): void {

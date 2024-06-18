@@ -3,6 +3,8 @@ import { Input } from "../input/Input";
 
 export class Button extends GameObject
 {
+    private _x: number;
+    private _y: number;
     private _text: string;
     private _fontSize: number;
     private _font: string;
@@ -11,18 +13,22 @@ export class Button extends GameObject
     private _backgroundColor: string;
     public constructor(x: number, y: number, width: number, height: number, text: string, isBold: boolean, fontSize: number, font: string, color: string, backgroundColor: string)
     {
-        super(x, y);
-        this._width = width;
-        this._height = height;
+        super(window.innerWidth - x * window.innerWidth/1920, window.innerHeight - y * window.innerHeight/1080);
+        this._x = x;
+        this._y = y;
+        this._width = width
+        this._height = height
         this._text = text;
         this._isBold = isBold;
-        this._fontSize = fontSize;
+        this._fontSize = fontSize
         this._font = font;
         this._color = color;
         this._backgroundColor = backgroundColor;
     }
     public update(deltaTime: number, input: Input): void
     {
+        this.position[0] = window.innerWidth - this._x * window.innerWidth/1920;
+        this.position[1] = window.innerHeight - this._y * window.innerHeight/1080;
         let click = input.getLastClick();
         if(click && click.x >= this.position[0] && click.x <= this.position[0] + this._width && click.y >= this.position[1] && click.y <= this.position[1] + this._height)
         {
