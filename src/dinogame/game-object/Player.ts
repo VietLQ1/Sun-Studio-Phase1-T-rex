@@ -38,11 +38,12 @@ export class Player extends AnimatedObject {
         if ((input.isKeyPressed('KeyW') || input.isKeyPressed('Space') || (touch && touch.x > window.innerWidth/2))&& this._rigidbody.isGrounded && !this._isDuck) {
             this._rigidbody.applyForce([0, this._jumpForce]);
             AudioManager.getInstance().getAudioClip('jump')?.play();
+            console.log('jump');
         }
+        this._rigidbody.update(deltaTime);
         if (!this._rigidbody.isGrounded) {
             input.clearTouch();
         }
-        this._rigidbody.update(deltaTime);
         if ((input.isKeyPressed('KeyS') || (touch && touch.x < window.innerWidth / 2 && input.getTouchEnd() == null)) && this._rigidbody.isGrounded) {
             this._isDuck = true;
             this._height = 100 * window.innerHeight / 1080;

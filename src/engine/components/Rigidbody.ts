@@ -26,6 +26,7 @@ export class RigidBody{
             if(this._gameObject.position[1] >= window.innerHeight - this._gameObject.height){
                 this._gameObject.position[1] = window.innerHeight - this._gameObject.height;
                 this._isGrounded = true;
+                this._velocity[1] = 0;
             }
         }
         this._gameObject.position[0] += this._velocity[0] * deltaTime;
