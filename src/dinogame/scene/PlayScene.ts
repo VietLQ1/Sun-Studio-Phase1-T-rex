@@ -6,12 +6,14 @@ import { ScoreManager } from "../../engine/manager/ScoreManager";
 import { Scene } from "../../engine/scene/Scene";
 import { SceneManager } from "../../engine/scene/SceneManager";
 import { GroundBird } from "../game-object/GroundBird";
+import { BGDragon } from "../game-object/BGDragon";
 
 export class PlayScene extends Scene
 {
     public onSceneLoad(): void {
         ScoreManager.getInstance().resetScore();
         this.addGameObject(new Player())
+        this.addGameObject(new BGDragon())
         this.addGameObject(new Cactus())
         this._renderer.clear();
     }
@@ -20,7 +22,7 @@ export class PlayScene extends Scene
     }
     public update(deltaTime: number, input: Input): void {
         super.update(deltaTime, input);
-        if (this.gameObjects.length == 1 || (this._gameObjects[1].position[0] <= window.innerWidth/3 && this.gameObjects.length < 3)) {
+        if (this.gameObjects.length == 2 || (this._gameObjects[2].position[0] <= window.innerWidth/3 && this.gameObjects.length < 4)) {
             let random = Math.random();
             if (random < 0.4) {
                 this.addGameObject(new Cactus());
@@ -32,7 +34,7 @@ export class PlayScene extends Scene
                 this.addGameObject(new Bird());
             }
         }
-        for (let i = 1; i < this._gameObjects.length; i++) {
+        for (let i = 2; i < this._gameObjects.length; i++) {
             if (this._gameObjects[i].position[0] < -this._gameObjects[i].collider.width) {
                 this._gameObjects.splice(i, 1);
             }
