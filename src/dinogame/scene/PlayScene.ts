@@ -22,7 +22,7 @@ export class PlayScene extends Scene
         super.update(deltaTime, input);
         if (this.gameObjects.length == 1 || (this._gameObjects[1].position[0] <= window.innerWidth/3 && this.gameObjects.length < 3)) {
             let random = Math.random();
-            if (random < 0.5) {
+            if (random < 0.4) {
                 this.addGameObject(new Cactus());
             }
             else if (random < 0.7) {
@@ -39,9 +39,12 @@ export class PlayScene extends Scene
         }
         if(!document.hasFocus())
         {
-            ScoreManager.getInstance().resetScore();
+            SceneManager.getInstance().loadScene(0);
         }
-        ScoreManager.getInstance().increaseScore(deltaTime);   
+        else
+        {
+            ScoreManager.getInstance().increaseScore(deltaTime);   
+        }
     }
     render(): void {
         super.render();
