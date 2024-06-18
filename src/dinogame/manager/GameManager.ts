@@ -5,10 +5,10 @@ export class GameManager {
     private _gameOverText: string;
     private constructor() {
         window.navigator.userAgent.match(/Mobile/) || window.navigator.userAgent.match(/Tablet/) ? this._isMobile = true : this._isMobile = false;
-        this._menuText = "Press Enter to Start";
+        this._menuText = "Press Button to Start";
         this._gameOverText = "Press Enter to Restart or ESC to go back to Menu";
         if (this._isMobile){
-            this._menuText = "Tap to Start";
+            this._menuText = "Tap Start Game";
             this._gameOverText = "Tap to Restart";
         }
     }

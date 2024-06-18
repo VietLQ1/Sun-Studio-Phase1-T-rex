@@ -2,12 +2,14 @@ import { Input } from "../../engine/input/Input";
 import { GameManager } from "../manager/GameManager";
 import { Scene } from "../../engine/scene/Scene";
 import { SceneManager } from "../../engine/scene/SceneManager";
+import { StartButton } from "../UI/StartButton";
 
 export class MenuScene extends Scene
 {
     onSceneLoad(): void {
         this._gameObjects = [];
         this._renderer.clear();
+        this.addGameObject(new StartButton());
     }
     onSceneUnload(): void {
         
@@ -15,10 +17,10 @@ export class MenuScene extends Scene
     update(deltaTime: number, input: Input): void {
         super.update(deltaTime, input);
         // console.log('Menu Scene');
-        if(input.isKeyPressed('Enter') || (input.getTouchStart() && GameManager.getInstance().isMobile) && document.hasFocus())
+        if(input.getTouchStart() && GameManager.getInstance().isMobile && document.hasFocus())
         {
-            input.clearTouch();
-            SceneManager.getInstance().loadScene(1);
+            // input.clearTouch();
+            // SceneManager.getInstance().loadScene(1);
         }
         else if(input.getTouchEnd() && document.hasFocus())
         {

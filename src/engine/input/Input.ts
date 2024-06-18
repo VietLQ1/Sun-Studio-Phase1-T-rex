@@ -31,7 +31,9 @@ export class Input {
         this.lastClick = { x: e.clientX, y: e.clientY };
         // Optionally, you can immediately check if this click is within a specific position.
     }
-
+    public getLastClick(): { x: number, y: number } | null {
+        return this.lastClick;
+    }
     public isKeyPressed(key: string): boolean {
         return !!this.keys[key];
     }
