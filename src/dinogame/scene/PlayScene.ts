@@ -19,18 +19,17 @@ export class PlayScene extends Scene
     }
     update(deltaTime: number, input: Input): void {
         super.update(deltaTime, input);
-        if (this._gameObjects[1].position[0] === this._gameObjects[0].position[0]) {
-                
+        if (this.gameObjects.length == 1 || (this._gameObjects[1].position[0] <= window.innerWidth/3 && this.gameObjects.length < 3)) {
+            let random = Math.random();
+            if (random < 0.75) {
+                this.addGameObject(new Cactus());
+            }
+            else {
+                this.addGameObject(new Bird());
+            }
         }
         for (let i = 1; i < this._gameObjects.length; i++) {
             if (this._gameObjects[i].position[0] < -this._gameObjects[i].collider.width) {
-                let random = Math.random();
-                if (random < 0.75) {
-                    this.addGameObject(new Cactus());
-                }
-                else {
-                    this.addGameObject(new Bird());
-                }
                 this._gameObjects.splice(i, 1);
             }
         }

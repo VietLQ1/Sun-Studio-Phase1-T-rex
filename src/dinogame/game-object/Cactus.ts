@@ -9,9 +9,8 @@ export class Cactus extends Obstacle
     constructor() {
         super();
         this._width = 80 * window.innerHeight / 1080;
-        this._height = 120 * window.innerHeight / 1080;
+        this._height = 100 * window.innerHeight / 1080;
         this._speed = 8000 ;
-        this._spawnInterval = 2;
         this.position[1] = window.innerHeight - this._height;
         this.collider = new Collider(this.position[0], this.position[1], this._width, this._height);
         this._animator.setState(new NormalState());
