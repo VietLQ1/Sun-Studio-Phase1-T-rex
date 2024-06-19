@@ -1,7 +1,7 @@
-import { AnimatedObject } from "../../engine/game-object/AnimatedObject";
-import { GameObject } from "../../engine/game-object/GameObject";
-import { Input } from "../../engine/input/Input";
-import { ScoreManager } from "../../engine/manager/ScoreManager";
+import { AnimatedObject } from "../../../engine/game-object/AnimatedObject";
+import { GameObject } from "../../../engine/game-object/GameObject";
+import { Input } from "../../../engine/input/Input";
+import { ScoreManager } from "../../../engine/manager/ScoreManager";
 
 export abstract class Obstacle extends AnimatedObject {
     protected _speed: number;

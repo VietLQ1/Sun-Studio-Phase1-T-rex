@@ -1,9 +1,9 @@
 import { Obstacle} from "./Obstacle";
-import { Collider } from "../../engine/components/Collider";
-import { SpriteRenderer } from "../../engine/components/SpriteRenderer";
-import { GameObject } from "../../engine/game-object/GameObject";
-import { Input } from "../../engine/input/Input";
-import { NormalState } from "../animation/NormalState";
+import { Collider } from "../../../engine/components/Collider";
+import { SpriteRenderer } from "../../../engine/components/SpriteRenderer";
+import { GameObject } from "../../../engine/game-object/GameObject";
+import { Input } from "../../../engine/input/Input";
+import { NormalState } from "../../animation/NormalState";
 export class Cactus extends Obstacle
 {
     constructor() {

@@ -1,15 +1,14 @@
-import { Bird } from "../game-object/Bird";
-import { Cactus } from "../game-object/Cactus";
+import { Bird } from "../game-object/obstacle-object/Bird";
+import { Cactus } from "../game-object/obstacle-object/Cactus";
 import { Player } from "../game-object/Player";
 import { Input } from "../../engine/input/Input";
 import { ScoreManager } from "../../engine/manager/ScoreManager";
 import { Scene } from "../../engine/scene/Scene";
 import { SceneManager } from "../../engine/scene/SceneManager";
-import { GroundBird } from "../game-object/GroundBird";
-import { BGDragon } from "../game-object/BGDragon";
-import { GameManager } from "../manager/GameManager";
-import { HighBird } from "../game-object/HighBird";
-import { BigCactus } from "../game-object/BigCactus";
+import { GroundBird } from "../game-object/obstacle-object/GroundBird";
+import { BGDragon } from "../game-object/background-object/BGDragon";
+import { HighBird } from "../game-object/obstacle-object/HighBird";
+import { BigCactus } from "../game-object/obstacle-object/BigCactus";
 
 export class PlayScene extends Scene
 {

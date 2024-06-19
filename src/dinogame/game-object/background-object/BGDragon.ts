@@ -1,5 +1,5 @@
-import { SpriteRenderer } from "../../engine/components/SpriteRenderer";
-import { Input } from "../../engine/input/Input";
+import { SpriteRenderer } from "../../../engine/components/SpriteRenderer";
+import { Input } from "../../../engine/input/Input";
 import { BGObject } from "./BGObject";
 
 export class BGDragon extends BGObject
