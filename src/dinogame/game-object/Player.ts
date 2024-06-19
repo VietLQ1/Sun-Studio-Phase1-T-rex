@@ -11,7 +11,7 @@ import { AnimatedObject } from '../../engine/game-object/AnimatedObject';
 export class Player extends AnimatedObject {
 
     private _isDuck = false;
-    private _jumpForce = 1500 * window.innerHeight / 1080;
+    private _jumpForce = 1690 * window.innerHeight / 1080;
     private _rigidbody = new RigidBody(this, true);
     private _alive = true;
     constructor() {
@@ -35,7 +35,8 @@ export class Player extends AnimatedObject {
             return;
         }
         let touch = input.getTouchStart();
-        if ((input.isKeyPressed('KeyW') || input.isKeyPressed('Space') || (touch && touch.x > window.innerWidth/2))&& this._rigidbody.isGrounded && !this._isDuck) {
+        if ((input.isKeyPressed('KeyW') || input.isKeyPressed('Space') || input.isKeyPressed('ArrowUp') 
+            || (touch && touch.x > window.innerWidth/2))&& this._rigidbody.isGrounded && !this._isDuck) {
             this._rigidbody.applyForce([0, this._jumpForce]);
             AudioManager.getInstance().getAudioClip('jump')?.play();
             console.log('jump');
@@ -44,7 +45,8 @@ export class Player extends AnimatedObject {
         if (!this._rigidbody.isGrounded) {
             input.clearTouch();
         }
-        if ((input.isKeyPressed('KeyS') || (touch && touch.x < window.innerWidth / 2 && input.getTouchEnd() == null)) && this._rigidbody.isGrounded) {
+        if ((input.isKeyPressed('KeyS') || input.isKeyPressed('ArrowDown') 
+            || (touch && touch.x < window.innerWidth / 2 && input.getTouchEnd() == null)) && this._rigidbody.isGrounded) {
             this._isDuck = true;
             this._height = 100 * window.innerHeight / 1080;
             this.position[1] = window.innerHeight - this._height;

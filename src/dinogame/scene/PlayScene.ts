@@ -8,6 +8,7 @@ import { SceneManager } from "../../engine/scene/SceneManager";
 import { GroundBird } from "../game-object/GroundBird";
 import { BGDragon } from "../game-object/BGDragon";
 import { GameManager } from "../manager/GameManager";
+import { HighBird } from "../game-object/HighBird";
 
 export class PlayScene extends Scene
 {
@@ -27,11 +28,14 @@ export class PlayScene extends Scene
         super.update(deltaTime, input);
         if (this.gameObjects.length == 2 || (this._gameObjects[2].position[0] <= window.innerWidth/3 && this.gameObjects.length < 4)) {
             let random = Math.random();
-            if (random < 0.4) {
+            if (random < 0.3) {
                 this.addGameObject(new Cactus());
             }
-            else if (random < 0.7) {
+            else if (random < 0.55) {
                 this.addGameObject(new GroundBird());
+            }
+            else if (random < 0.7) {
+                this.addGameObject(new HighBird());
             }
             else {
                 this.addGameObject(new Bird());
