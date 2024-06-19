@@ -2,7 +2,7 @@ import { Input } from "../input/Input";
 import { Collider } from "../components/Collider";
 import { SpriteRenderer } from "../components/SpriteRenderer";
 
-export abstract class GameObject {
+export abstract class GameObject implements Engine.IGameObject {
     public position: [number, number, number];
     public rotation: [number, number, number];
     public scale: [number, number, number];
