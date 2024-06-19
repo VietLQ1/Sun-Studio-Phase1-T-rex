@@ -1,14 +1,24 @@
+import { AssetLoader } from "../AssetLoader";
+
 export class SpriteRenderer
 {
     private _image : HTMLImageElement;
     constructor(spritePath : string)
     {
-        this._image = new Image();
-        this._image.src = spritePath;
-        this._image.onload = () => {
-            //console.log('Sprite loaded')
+        if (AssetLoader.assetMap.has(spritePath))
+        {
+            this._image = AssetLoader.assetMap.get(spritePath) as HTMLImageElement;
+            console.log('Sprite loaded from assetMap');
         }
+        else
+        {
+            this._image = new Image();
+            this._image.src = spritePath;
+            this._image.onload = () => {
+                //console.log('Sprite loaded')
+            }
         //console.log('SpriteRenderer created')
+        }
     }
     public render(x: number, y: number, width: number, height: number,) : void
     {

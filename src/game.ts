@@ -13,6 +13,19 @@ const spriteRenderer = new SpriteRenderer('assets/images/phaser-logo.png');
 
 class DinoGame extends Game
 {
+    constructor(canvas: HTMLCanvasElement) {
+        super(canvas);
+        this._aPath = ['assets/audios/jump.wav', 'assets/audios/collide.wav', 'assets/audios/button.mp3'];
+        this._iPath = ['assets/images/BG.png','assets/images/pixel_cactus.png','assets/images/bird_flap_0.png','assets/images/bird_flap_1.png','assets/images/bird_flap_2.png'
+            , 'assets/images/dragon_0.png','assets/images/dragon_1.png','assets/images/dragon_2.png','assets/images/dragon_3.png','assets/images/seiba_hurt.png'
+            , 'assets/images/seiba_walking_0.png','assets/images/seiba_walking_1.png','assets/images/seiba_walking_2.png','assets/images/seiba_walking_3.png'
+        ];
+        this.loadAssets().then(() => {
+            this.start(0);
+        }).catch(error => {
+            console.error("Failed to load assets:", error);
+        });
+    }
     public start(currentTime: number): void {
         SceneManager.getInstance().addScene(new MenuScene(this.renderer, canvas));
         SceneManager.getInstance().addScene(new PlayScene(this.renderer, canvas));
@@ -24,7 +37,7 @@ class DinoGame extends Game
 }
 
 const game = new DinoGame(canvas);
-game.start(0);
+// game.start(0);
 
 
 

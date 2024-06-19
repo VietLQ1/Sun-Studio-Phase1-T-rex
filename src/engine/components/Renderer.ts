@@ -1,3 +1,4 @@
+import { AssetLoader } from "../AssetLoader";
 import { Scene } from "../scene/Scene";
 
 export class Renderer {
@@ -21,6 +22,11 @@ export class Renderer {
         gameScene.render();
     }
     public setBG(path : string) {
+        if (AssetLoader.assetMap.has(path) && AssetLoader.assetMap.get(path) instanceof HTMLImageElement) {
+            this.BG = AssetLoader.assetMap.get(path) as HTMLImageElement;
+            console.log('BG set from asset map');
+            return;
+        }
         this.BG.src = path;
     }
     public clear() {

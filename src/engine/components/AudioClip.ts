@@ -1,6 +1,13 @@
+import { AssetLoader } from "../AssetLoader";
+
 export class AudioClip {
     private _audio: HTMLAudioElement;
     constructor(clipPath : string) {
+        if (AssetLoader.assetMap.has(clipPath)) {
+            this._audio = AssetLoader.assetMap.get(clipPath) as HTMLAudioElement;
+            console.log("Audio loaded from assetMap");
+            return;
+        }
         this._audio = new Audio(clipPath);
     }
     public play() {
