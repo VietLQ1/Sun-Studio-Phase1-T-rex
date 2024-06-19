@@ -9,7 +9,7 @@ import { Game } from './engine/Game';
 const canvas = document.createElement('canvas') as HTMLCanvasElement;
 
 document.body.appendChild(canvas);
-const spriteRenderer = new SpriteRenderer('assets/images/phaser-logo.png');
+//const spriteRenderer = new SpriteRenderer('assets/images/phaser-logo.png');
 
 class DinoGame extends Game
 {
@@ -37,6 +37,13 @@ class DinoGame extends Game
 }
 
 const game = new DinoGame(canvas);
+let context = canvas.getContext('2d');
+if (context) {
+    context.font = '30px Arial';
+    context.textAlign = 'center';
+    context.fillStyle = 'white';
+    context.fillText('Dino is Loading...', canvas.width / 2 - 50, canvas.height / 2);
+}
 // game.start(0);
 
 

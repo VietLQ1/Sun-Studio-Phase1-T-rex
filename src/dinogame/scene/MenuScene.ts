@@ -3,6 +3,7 @@ import { GameManager } from "../manager/GameManager";
 import { Scene } from "../../engine/scene/Scene";
 import { SceneManager } from "../../engine/scene/SceneManager";
 import { StartButton } from "../UI/StartButton";
+import { ScoreManager } from "../../engine/manager/ScoreManager";
 
 export class MenuScene extends Scene
 {
@@ -40,6 +41,7 @@ export class MenuScene extends Scene
         ctx.textAlign = 'center';
         ctx.textBaseline = 'middle';
         ctx.fillStyle = 'black';
+        ctx.fillText('Record: ' + Math.floor(ScoreManager.getInstance().highScore), window.innerWidth/2, window.innerHeight/2 - 100);
         // ctx.fillText(GameManager.getInstance().menuText, window.innerWidth/2, window.innerHeight/2);
     }
 }
