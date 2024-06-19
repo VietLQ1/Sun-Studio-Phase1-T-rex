@@ -9,6 +9,7 @@ import { GroundBird } from "../game-object/GroundBird";
 import { BGDragon } from "../game-object/BGDragon";
 import { GameManager } from "../manager/GameManager";
 import { HighBird } from "../game-object/HighBird";
+import { BigCactus } from "../game-object/BigCactus";
 
 export class PlayScene extends Scene
 {
@@ -32,10 +33,13 @@ export class PlayScene extends Scene
                 this.addGameObject(new Cactus());
             }
             else if (random < 0.55) {
-                this.addGameObject(new GroundBird());
+                this.addGameObject(new BigCactus());
             }
             else if (random < 0.7) {
                 this.addGameObject(new HighBird());
+            }
+            else if (random < 0.85) {
+                this.addGameObject(new GroundBird());
             }
             else {
                 this.addGameObject(new Bird());

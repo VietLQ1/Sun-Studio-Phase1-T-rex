@@ -40,6 +40,6 @@ export class MenuScene extends Scene
         ctx.textAlign = 'center';
         ctx.textBaseline = 'middle';
         ctx.fillStyle = 'black';
-        ctx.fillText(GameManager.getInstance().menuText, window.innerWidth/2, window.innerHeight/2);
+        // ctx.fillText(GameManager.getInstance().menuText, window.innerWidth/2, window.innerHeight/2);
     }
 }

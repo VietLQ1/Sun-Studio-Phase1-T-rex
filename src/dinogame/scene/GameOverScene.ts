@@ -48,6 +48,6 @@ export class GameOverScene extends Scene {
         ctx.textBaseline = 'middle';
         ctx.fillText('Your Score: ' + Math.floor(ScoreManager.getInstance().score), window.innerWidth/2, 50);
         ctx.fillText('High Score: ' + Math.floor(ScoreManager.getInstance().highScore), window.innerWidth/2, 100);
-        ctx.fillText(GameManager.getInstance().gameOverText, window.innerWidth/2, window.innerHeight/2);
+        // ctx.fillText(GameManager.getInstance().gameOverText, window.innerWidth/2, window.innerHeight/2);
     }
 }

@@ -12,7 +12,8 @@ export class Button extends GameObject
     private _isBold: boolean;
     private _color: string;
     private _backgroundColor: string;
-    public constructor(x: number, y: number, width: number, height: number, text: string, isBold: boolean, fontSize: number, font: string, color: string, backgroundColor: string)
+    public constructor(x: number, y: number, width: number, height: number, text: string
+        , isBold: boolean, fontSize: number, font: string, color: string, backgroundColor: string)
     {
         super(window.innerWidth - x * window.innerWidth/1920, window.innerHeight - y * window.innerHeight/1080);
         this.collider = new Collider(this.position[0], this.position[1], 0, 0);
@@ -32,7 +33,8 @@ export class Button extends GameObject
         this.position[0] = window.innerWidth - this._x * window.innerWidth/1920;
         this.position[1] = window.innerHeight - this._y * window.innerHeight/1080;
         let click = input.getLastClick();
-        if(click && click.x >= this.position[0] && click.x <= this.position[0] + this._width && click.y >= this.position[1] && click.y <= this.position[1] + this._height)
+        if(click && click.x >= this.position[0] && click.x <= this.position[0] + this._width 
+            && click.y >= this.position[1] && click.y <= this.position[1] + this._height)
         {
             input.clearTouch();
             this.onButtonClicked();
@@ -40,7 +42,8 @@ export class Button extends GameObject
         else
         {
             let touch = input.getTouchEnd();
-            if(touch && touch.x >= this.position[0] && touch.x <= this.position[0] + this._width && touch.y >= this.position[1] && touch.y <= this.position[1] + this._height)
+            if(touch && touch.x >= this.position[0] && touch.x <= this.position[0] + this._width 
+                && touch.y >= this.position[1] && touch.y <= this.position[1] + this._height)
             {
                 input.clearTouch();
                 this.onButtonClicked();
