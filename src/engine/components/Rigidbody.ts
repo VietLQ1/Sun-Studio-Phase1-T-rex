@@ -20,6 +20,9 @@ export class RigidBody{
         this._isKinematic = isKinematic;
     }
     public update(deltaTime: number){
+        if(this._gameObject.isEnable == false){
+            return;
+        }
         if(!this._isKinematic && !this._isGrounded){
             this._velocity[1] -= this._gravity * deltaTime * window.innerHeight / 1080;
             this._gameObject.position[1] -= this._velocity[1] * deltaTime;
@@ -32,6 +35,9 @@ export class RigidBody{
         this._gameObject.position[0] += this._velocity[0] * deltaTime;
     }
     public applyForce(force: [number, number]){
+        if(this._gameObject.isEnable == false){
+            return;
+        }
         this._velocity[0] += force[0] / this._mass;
         this._velocity[1] += force[1] / this._mass;
         if(this._isGrounded && force[1] > 0){

@@ -11,11 +11,27 @@ export abstract class GameObject implements Engine.IGameObject {
     protected _height: number;
     public collider: Collider;
     public spriteRenderer: SpriteRenderer;
-    
+    protected _isEnable: boolean;
     constructor(x: number = 0, y: number = 0) {
         this.position = [x, y, 0];
         this.rotation = [0, 0, 0];
         this.scale = [1, 1, 1];
+        this.enable();
+    }
+    public enable(): void {
+        this._isEnable = true;
+        this.onEnable();
+    }
+    public disable(): void {
+        this._isEnable = false;
+        this.onDisable();
+    }
+    public get isEnable(): boolean {
+        return this._isEnable;
+    }
+    protected onEnable(): void {
+    }
+    protected onDisable(): void {
     }
     abstract update(deltaTime: number, input: Input): void;
     abstract render(): void;
