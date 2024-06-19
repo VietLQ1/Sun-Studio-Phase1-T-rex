@@ -23,7 +23,7 @@ class DinoGame extends Game
     }
 }
 
-let game = new DinoGame(canvas);
+const game = new DinoGame(canvas);
 game.start(0);
 
 
