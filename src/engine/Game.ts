@@ -4,6 +4,7 @@ import { Renderer } from './components/Renderer';
 import { SceneManager } from './scene/SceneManager';
 import { CollisionManager } from './manager/CollisionManager';
 import { AssetLoader } from './AssetLoader';
+import { GameManager } from '../dinogame/manager/GameManager';
 export class Game {
     renderer : Renderer;
     input: Input;
@@ -27,7 +28,10 @@ export class Game {
             throw new Error("Paths not set");
         }
         const images = await AssetLoader.loadImages(this._iPath);
-        const audios = await AssetLoader.loadAudios(this._aPath);
+        if(!GameManager.getInstance().isMobile)    
+        {
+            const audios = await AssetLoader.loadAudios(this._aPath);
+        }
     }
     public start(currentTime: number) {
         requestAnimationFrame((timestamp) => this.gameLoop(timestamp));
@@ -40,5 +44,11 @@ export class Game {
         CollisionManager.getInstance().checkCollisions(currentScene);
         this.renderer.render(currentScene);
         requestAnimationFrame((timestamp) => this.gameLoop(timestamp));
+    }
+    public get iPath() {
+        return this._iPath;
+    }
+    public get aPath() {
+        return this._aPath;
     }
 }

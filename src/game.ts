@@ -4,6 +4,7 @@ import { MenuScene } from './dinogame/scene/MenuScene';
 import { PlayScene } from './dinogame/scene/PlayScene';
 import { GameOverScene } from './dinogame/scene/GameOverScene';
 import { Game } from './engine/Game';
+import { AssetLoader } from './engine/AssetLoader';
 
 
 const canvas = document.createElement('canvas') as HTMLCanvasElement;
@@ -37,13 +38,26 @@ class DinoGame extends Game
 }
 
 const game = new DinoGame(canvas);
-let context = canvas.getContext('2d');
-if (context) {
-    context.font = '30px Arial';
-    context.textAlign = 'center';
-    context.fillStyle = 'white';
-    context.fillText('Dino is Loading...', canvas.width / 2 - 50, canvas.height / 2);
+const context = canvas.getContext('2d');
+function loading() {
+    context?.clearRect(0, 0, canvas.width, canvas.height);
+    if (context) {
+        context.font = '30px Arial';
+        context.textAlign = 'center';
+        context.fillStyle = 'white';
+        context.fillText('Loading ' + Math.floor(100 * AssetLoader.assetMap.size / (game.iPath.length + game.aPath.length)) + '%', canvas.width / 2, canvas.height / 2);
+    }
+    if(AssetLoader.assetMap.size == game.iPath.length + game.iPath.length)
+    {
+        return;
+    }
+    else
+    {
+        requestAnimationFrame(loading);
+    }
 }
+loading();
+
 // game.start(0);
 
 
