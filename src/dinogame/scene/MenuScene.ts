@@ -2,7 +2,7 @@ import { Input } from "../../engine/input/Input";
 import { GameManager } from "../manager/GameManager";
 import { Scene } from "../../engine/scene/Scene";
 import { SceneManager } from "../../engine/scene/SceneManager";
-import { StartButton } from "../UI/StartButton";
+import { StartButton } from "../user-interface/StartButton";
 import { ScoreManager } from "../../engine/manager/ScoreManager";
 
 export class MenuScene extends Scene

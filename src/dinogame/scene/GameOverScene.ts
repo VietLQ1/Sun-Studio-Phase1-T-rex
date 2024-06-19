@@ -3,7 +3,7 @@ import { GameManager } from "../manager/GameManager";
 import { ScoreManager } from "../../engine/manager/ScoreManager";
 import { Scene } from "../../engine/scene/Scene";
 import { SceneManager } from "../../engine/scene/SceneManager";
-import { RestartButton } from "../UI/RestartButton";
+import { RestartButton } from "../user-interface/RestartButton";
 
 export class GameOverScene extends Scene {
     public onSceneLoad(): void {

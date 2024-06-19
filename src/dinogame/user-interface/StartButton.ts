@@ -1,7 +1,7 @@
 import { Input } from "../../engine/input/Input";
 import { AudioManager } from "../../engine/manager/AudioManager";
 import { SceneManager } from "../../engine/scene/SceneManager";
-import { Button } from "../../engine/UI/Button";
+import { Button } from "../../engine/user-interface/Button";
 
 export class StartButton extends Button
 {
