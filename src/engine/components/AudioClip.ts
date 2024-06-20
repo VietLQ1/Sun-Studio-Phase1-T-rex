@@ -5,7 +5,7 @@ export class AudioClip {
     constructor(clipPath : string) {
         if (AssetLoader.assetMap.has(clipPath)) {
             this._audio = AssetLoader.assetMap.get(clipPath) as HTMLAudioElement;
-            console.log("Audio loaded from assetMap");
+            //console.log("Audio loaded from assetMap");
             return;
         }
         this._audio = new Audio(clipPath);

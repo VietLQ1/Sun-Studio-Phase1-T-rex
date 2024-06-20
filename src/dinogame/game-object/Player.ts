@@ -41,7 +41,7 @@ export class Player extends AnimatedObject {
             || (touch && touch.x > window.innerWidth/2))&& this._rigidbody.isGrounded && !this._isDuck) {
             this._rigidbody.applyForce([0, this._jumpForce]);
             AudioManager.getInstance().getAudioClip('jump')?.play();
-            console.log('jump');
+            //console.log('jump');
         }
         this._rigidbody.update(deltaTime);
         if (!this._rigidbody.isGrounded) {

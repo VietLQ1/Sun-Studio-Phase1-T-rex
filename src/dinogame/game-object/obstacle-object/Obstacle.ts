@@ -30,4 +30,8 @@ export abstract class Obstacle extends AnimatedObject {
             this._speed = 0;
         }
     }
+    protected onEnable(): void {
+        super.onEnable();
+        this.position[0] = Math.max(window.innerWidth, 1536) + Math.random() * 100;
+    }
 }

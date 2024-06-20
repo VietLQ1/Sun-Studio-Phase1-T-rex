@@ -12,17 +12,33 @@ import { BigCactus } from "../game-object/obstacle-object/BigCactus";
 import { Text } from "../../engine/user-interface/Text";
 import { AudioManager } from "../../engine/manager/AudioManager";
 import { GameManager } from "../manager/GameManager";
+import { GameObjectPool } from "../../engine/object-pool/ObjectPool";
+import { Renderer } from "../../engine/components/Renderer";
 
 export class PlayScene extends Scene
 {
     protected _delay: number;
+    protected _cactusPool: GameObjectPool<Cactus>;
+    protected _birdPool: GameObjectPool<Bird>;
+    protected _bigCactusPool: GameObjectPool<BigCactus>;
+    protected _highBirdPool: GameObjectPool<HighBird>;
+    protected _groundBirdPool: GameObjectPool<GroundBird>;
+    public constructor(renderer: Renderer, canvas : HTMLCanvasElement){
+        super(renderer, canvas);
+        this._cactusPool = new GameObjectPool(() => new Cactus());
+        this._birdPool = new GameObjectPool(() => new Bird());
+        this._bigCactusPool = new GameObjectPool(() => new BigCactus());
+        this._highBirdPool = new GameObjectPool(() => new HighBird());
+        this._groundBirdPool = new GameObjectPool(() => new GroundBird());
+    }
     public onSceneLoad(): void {
         GameManager.getInstance().isGameOver = false;
         this._delay = 0;
         ScoreManager.getInstance().resetScore();
         this.addGameObject(new Player())
         this.addGameObject(new BGDragon())
-        this.addGameObject(new Cactus())
+        let obstacle = this._cactusPool.get();
+        this.addGameObject(obstacle);
         this.addUIObject(new Text( window.innerWidth/2, 50, 'Score: ' + Math.floor(ScoreManager.getInstance().score), 'center','middle',true, 50, 'Arial', 'black'));
         AudioManager.getInstance().addAudioClip('up', 'assets/audios/up.wav');
         this._renderer.clear();
@@ -37,24 +53,47 @@ export class PlayScene extends Scene
         super.update(deltaTime, input);
         if (this.gameObjects.length == 2 || (this._gameObjects[2].position[0] <= window.innerWidth/3 && this.gameObjects.length < 4)) {
             let random = Math.random();
+            let obstacle = null;
             if (random < 0.3) {
-                this.addGameObject(new Cactus());
+                obstacle = this._cactusPool.get();
             }
             else if (random < 0.55) {
-                this.addGameObject(new BigCactus());
+                obstacle = this._bigCactusPool.get();
             }
             else if (random < 0.7) {
-                this.addGameObject(new HighBird());
+                obstacle = this._highBirdPool.get();
             }
             else if (random < 0.85) {
-                this.addGameObject(new GroundBird());
+                obstacle = this._groundBirdPool.get();
             }
             else {
-                this.addGameObject(new Bird());
+                obstacle = this._birdPool.get();
             }
+            this.addGameObject(obstacle);
         }
+
         for (let i = 2; i < this._gameObjects.length; i++) {
             if (this._gameObjects[i].position[0] < -this._gameObjects[i].collider.width) {
+                if(this._gameObjects[i] instanceof Cactus)
+                {
+                    this._cactusPool.release(this._gameObjects[i] as Cactus);
+                }
+                else if(this._gameObjects[i] instanceof Bird)
+                {
+                    this._birdPool.release(this._gameObjects[i] as Bird);
+                }
+                else if(this._gameObjects[i] instanceof BigCactus)
+                {
+                    this._bigCactusPool.release(this._gameObjects[i] as BigCactus);
+                }
+                else if(this._gameObjects[i] instanceof HighBird)
+                {
+                    this._highBirdPool.release(this._gameObjects[i] as HighBird);
+                }
+                else if(this._gameObjects[i] instanceof GroundBird)
+                {
+                    this._groundBirdPool.release(this._gameObjects[i] as GroundBird);
+                }
                 this._gameObjects.splice(i, 1);
             }
         }

@@ -20,10 +20,18 @@ export abstract class Scene {
     public update(deltaTime: number , input : Input): void
     {
         for (let i = 0; i < this._gameObjects.length; i++) {
-            this._gameObjects[i].update(deltaTime, input);
+            if(this._gameObjects[i].isEnable)
+            {
+                this._gameObjects[i].update(deltaTime, input);
+            }
+            
         }
         for (let i = 0; i < this._uiObjects.length; i++) {
-            this._uiObjects[i].update(deltaTime, input);
+            if(this._uiObjects[i].isEnable)
+            {
+                this._uiObjects[i].update(deltaTime, input);
+            }
+            
         }
     
     }

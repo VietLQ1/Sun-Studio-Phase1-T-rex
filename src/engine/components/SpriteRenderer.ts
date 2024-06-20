@@ -8,7 +8,7 @@ export class SpriteRenderer
         if (AssetLoader.assetMap.has(spritePath))
         {
             this._image = AssetLoader.assetMap.get(spritePath) as HTMLImageElement;
-            console.log('Sprite loaded from assetMap');
+            //console.log('Sprite loaded from assetMap');
         }
         else
         {
