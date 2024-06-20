@@ -47,14 +47,21 @@ export class Player extends AnimatedObject {
             input.clearTouch();
         }
         if ((input.isKeyPressed('KeyS') || input.isKeyPressed('ArrowDown') 
-            || (touch && touch.x < window.innerWidth / 2 && input.getTouchEnd() == null)) && this._rigidbody.isGrounded) {
-            if(!this._isDuck)
-            {
-                AudioManager.getInstance().getAudioClip('duck')?.play();
+            || (touch && touch.x < window.innerWidth / 2 && input.getTouchEnd() == null)) ) {
+            
+            if (this._rigidbody.isGrounded){
+                if(!this._isDuck)
+                {
+                    AudioManager.getInstance().getAudioClip('duck')?.play();
+                }
+                this._isDuck = true;
+                this._height = 100 * window.innerHeight / 1080;
+                this.position[1] = window.innerHeight - this._height;
             }
-            this._isDuck = true;
-            this._height = 100 * window.innerHeight / 1080;
-            this.position[1] = window.innerHeight - this._height;
+            if (!this._rigidbody.isGrounded )
+            {
+                this._rigidbody.applyForce([0, -this._jumpForce * 0.15]);
+            }
         }
         else if (this._rigidbody.isGrounded) 
         {
@@ -75,9 +82,15 @@ export class Player extends AnimatedObject {
         this._animator.setState(new CollidedState());
         if (other.tag == 'obstacle')
         {
+            AudioManager.getInstance().getAudioClip('collide')?.play();
+            this._alive = false;    
+            if(this._isDuck)
+                {
+                    this._height = 200 * window.innerHeight / 1080;
+                    this.position[1] = window.innerHeight - this._height;
+                    this._isDuck = false;
+                }
             SceneManager.getInstance().loadScene(2);
         }
-        AudioManager.getInstance().getAudioClip('collide')?.play();
-        this._alive = false;
     }
 }

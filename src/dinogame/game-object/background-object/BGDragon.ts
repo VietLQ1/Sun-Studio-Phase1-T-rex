@@ -1,5 +1,6 @@
 import { SpriteRenderer } from "../../../engine/components/SpriteRenderer";
 import { Input } from "../../../engine/input/Input";
+import { ScoreManager } from "../../../engine/manager/ScoreManager";
 import { BGObject } from "./BGObject";
 
 export class BGDragon extends BGObject
@@ -18,7 +19,7 @@ export class BGDragon extends BGObject
     }
     public update(deltaTime: number, input: Input): void {
         super.update(deltaTime, input);
-        if (this.position[0] >window.innerWidth) {
+        if (this.position[0] >window.innerWidth && Math.floor(ScoreManager.getInstance().score) % 100 + 50 == 69){
             this.position[0] = -this._width - Math.random() * 1000;
         }
     }
