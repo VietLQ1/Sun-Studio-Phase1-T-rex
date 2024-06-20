@@ -25,6 +25,7 @@ export class AssetLoader
             };
             audio.onerror = () => reject(new Error(`Failed to load audio at ${url}`));
             audio.src = url;
+            audio.load();
         });
     }
     static loadAudios(urls: string[]): Promise<HTMLAudioElement[]> {

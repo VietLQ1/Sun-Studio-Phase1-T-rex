@@ -16,7 +16,7 @@ class DinoGame extends Game
 {
     constructor(canvas: HTMLCanvasElement) {
         super(canvas);
-        this._aPath = ['assets/audios/jump.wav', 'assets/audios/collide.wav', 'assets/audios/button.mp3'];
+        this._aPath = ['assets/audios/jump.wav', 'assets/audios/collide.wav', 'assets/audios/button.mp3', 'assets/audios/up.wav'];
         this._iPath = ['assets/images/BG.png','assets/images/pixel_cactus.png','assets/images/bird_flap_0.png','assets/images/bird_flap_1.png','assets/images/bird_flap_2.png'
             , 'assets/images/dragon_0.png','assets/images/dragon_1.png','assets/images/dragon_2.png','assets/images/dragon_3.png','assets/images/seiba_hurt.png'
             , 'assets/images/seiba_walking_0.png','assets/images/seiba_walking_1.png','assets/images/seiba_walking_2.png','assets/images/seiba_walking_3.png'

@@ -5,6 +5,7 @@ export class Renderer {
     canvas: HTMLCanvasElement;
     BG : HTMLImageElement;
     BGX : number = 0;
+    private _renderingScene : Scene;
     constructor(canvas : HTMLCanvasElement) {
         this.canvas = canvas;
         this.BG = new Image();
@@ -19,6 +20,13 @@ export class Renderer {
     }
     public render(gameScene : Scene)
     {
+        if (gameScene == null) {
+            return;
+        }
+        else if (this._renderingScene != gameScene) {
+            this.resizeCanvas();
+            this._renderingScene = gameScene;
+        }
         gameScene.render();
     }
     public setBG(path : string) {

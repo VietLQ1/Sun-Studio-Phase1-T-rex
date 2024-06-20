@@ -10,6 +10,7 @@ import { BGDragon } from "../game-object/background-object/BGDragon";
 import { HighBird } from "../game-object/obstacle-object/HighBird";
 import { BigCactus } from "../game-object/obstacle-object/BigCactus";
 import { Text } from "../../engine/user-interface/Text";
+import { AudioManager } from "../../engine/manager/AudioManager";
 
 export class PlayScene extends Scene
 {
@@ -21,6 +22,7 @@ export class PlayScene extends Scene
         this.addGameObject(new BGDragon())
         this.addGameObject(new Cactus())
         this.addUIObject(new Text( window.innerWidth/2, 50, 'Score: ' + Math.floor(ScoreManager.getInstance().score), 'center','middle',true, 50, 'Arial', 'black'));
+        AudioManager.getInstance().addAudioClip('up', 'assets/audios/up.wav');
         this._renderer.clear();
         
     }
@@ -63,9 +65,10 @@ export class PlayScene extends Scene
             this._uiObjects[0].text = 'Score: ' + Math.floor(ScoreManager.getInstance().score);
             if(Math.floor(ScoreManager.getInstance().score) % 100 == 0 && Math.floor(ScoreManager.getInstance().score) != 0)
             {
+                AudioManager.getInstance().getAudioClip('up')?.play();
                 this._uiObjects[0].startBlink(200);
             }
-            else if (Math.floor(ScoreManager.getInstance().score) % 100 == 25 && Math.floor(ScoreManager.getInstance().score) > 100)
+            else if (Math.floor(ScoreManager.getInstance().score) % 100 == 15 && Math.floor(ScoreManager.getInstance().score) > 100)
             {
                 this._uiObjects[0].stopBlink();
             }
