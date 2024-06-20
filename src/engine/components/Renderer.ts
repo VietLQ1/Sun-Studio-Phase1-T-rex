@@ -9,7 +9,7 @@ export class Renderer {
         this.canvas = canvas;
         this.BG = new Image();
         this.resizeCanvas();
-        window.addEventListener('resize', () => this.resizeCanvas());
+        //window.addEventListener('resize', () => this.resizeCanvas());
     }
 
     public resizeCanvas() {

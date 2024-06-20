@@ -7,7 +7,7 @@ export class RestartButton extends Button
 {
     constructor()
     {
-        super(1100, 480, 200, 100,'Restart', true, 30, 'Arial', 'blue', 'pink');
+        super(window.innerWidth/2 - 100, window.innerHeight/2, 200, 100,'Restart', true, 30, 'Arial', 'blue', 'pink');
         AudioManager.getInstance().addAudioClip('button', 'assets/audios/button.mp3');
     }
     public update(deltaTime: number, input: Input): void {

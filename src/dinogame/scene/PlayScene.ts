@@ -9,6 +9,7 @@ import { GroundBird } from "../game-object/obstacle-object/GroundBird";
 import { BGDragon } from "../game-object/background-object/BGDragon";
 import { HighBird } from "../game-object/obstacle-object/HighBird";
 import { BigCactus } from "../game-object/obstacle-object/BigCactus";
+import { Text } from "../../engine/user-interface/Text";
 
 export class PlayScene extends Scene
 {
@@ -19,10 +20,13 @@ export class PlayScene extends Scene
         this.addGameObject(new Player())
         this.addGameObject(new BGDragon())
         this.addGameObject(new Cactus())
+        this.addUIObject(new Text( window.innerWidth/2, 50, 'Score: ' + Math.floor(ScoreManager.getInstance().score), 'center','middle',true, 50, 'Arial', 'black'));
         this._renderer.clear();
+        
     }
     public onSceneUnload(): void {
         this._gameObjects = [];
+        this._uiObjects = [];
     }
     public update(deltaTime: number, input: Input): void {
         super.update(deltaTime, input);
@@ -56,6 +60,15 @@ export class PlayScene extends Scene
         else
         {
             ScoreManager.getInstance().increaseScore(deltaTime);   
+            this._uiObjects[0].text = 'Score: ' + Math.floor(ScoreManager.getInstance().score);
+            if(Math.floor(ScoreManager.getInstance().score) % 100 == 0 && Math.floor(ScoreManager.getInstance().score) != 0)
+            {
+                this._uiObjects[0].startBlink(200);
+            }
+            else if (Math.floor(ScoreManager.getInstance().score) % 100 == 25 && Math.floor(ScoreManager.getInstance().score) > 100)
+            {
+                this._uiObjects[0].stopBlink();
+            }
         }
     }
     public render(): void {
@@ -66,10 +79,5 @@ export class PlayScene extends Scene
             console.log('Failed to get 2d context');
             return;
         }
-        ctx.font = 'bold 50px Arial';
-        ctx.textAlign = 'center';
-        ctx.textBaseline = 'middle';
-        ctx.fillStyle = 'black';
-        ctx.fillText('Score: ' + Math.floor(ScoreManager.getInstance().score), window.innerWidth/2, 50);
     }
 }

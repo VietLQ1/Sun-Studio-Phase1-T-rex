@@ -1,21 +1,17 @@
 import { Collider } from "../components/Collider";
 import { GameObject } from "../game-object/GameObject";
 import { Input } from "../input/Input";
+import { UIObject } from "./UIObject";
 
-export class Button extends GameObject
+export class Button extends UIObject
 {
     private _x: number;
     private _y: number;
-    private _text: string;
-    private _fontSize: number;
-    private _font: string;
-    private _isBold: boolean;
-    private _color: string;
     private _backgroundColor: string;
     public constructor(x: number, y: number, width: number, height: number, text: string
         , isBold: boolean, fontSize: number, font: string, color: string, backgroundColor: string)
     {
-        super(window.innerWidth - x * window.innerWidth/1920, window.innerHeight - y * window.innerHeight/1080);
+        super(x, y);
         this.collider = new Collider(this.position[0], this.position[1], 0, 0);
         this._x = x;
         this._y = y;
@@ -30,8 +26,6 @@ export class Button extends GameObject
     }
     public update(deltaTime: number, input: Input): void
     {
-        this.position[0] = window.innerWidth - this._x * window.innerWidth/1920;
-        this.position[1] = window.innerHeight - this._y * window.innerHeight/1080;
         let click = input.getLastClick();
         if(click && click.x >= this.position[0] && click.x <= this.position[0] + this._width 
             && click.y >= this.position[1] && click.y <= this.position[1] + this._height)

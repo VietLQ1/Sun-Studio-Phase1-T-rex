@@ -8,7 +8,7 @@ export class StartButton extends Button
     constructor()
     {
         console.log(window.innerWidth, window.innerHeight);
-        super(1100, 480, 200, 100,'Start Game', true, 30, 'Arial', 'blue', 'orange');
+        super(window.innerWidth/2 - 100, window.innerHeight/2 - 50, 200, 100,'Start Game', true, 30, 'Arial', 'blue', 'orange');
         AudioManager.getInstance().addAudioClip('button', 'assets/audios/button.mp3');
     }
     public update(deltaTime: number, input: Input): void {
