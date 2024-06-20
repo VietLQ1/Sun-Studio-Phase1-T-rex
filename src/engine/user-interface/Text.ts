@@ -64,5 +64,6 @@ export class Text extends UIObject
         this.isBlinking = false;
         console.log(this._blinkID)
         clearInterval(this._blinkID);
+        this._fontSize = this._ogSize;
     }
 }
