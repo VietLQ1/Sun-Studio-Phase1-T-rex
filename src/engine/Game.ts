@@ -34,6 +34,7 @@ export class Game {
         }
     }
     public start(currentTime: number) {
+        this.renderer.resizeCanvas();
         requestAnimationFrame((timestamp) => this.gameLoop(timestamp));
     }
     private gameLoop(currentTime: number) {

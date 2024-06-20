@@ -18,7 +18,7 @@ export class RestartButton extends Button
         super.render();
     }
     public onButtonClicked(): void {
-        SceneManager.getInstance().loadScene(1);
         AudioManager.getInstance().getAudioClip('button')?.play();
+        SceneManager.getInstance().loadScene(1);
     }
 }
