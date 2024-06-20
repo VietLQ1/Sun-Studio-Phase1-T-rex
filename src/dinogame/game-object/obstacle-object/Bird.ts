@@ -25,6 +25,6 @@ export class Bird extends Obstacle
         super.render();
     }
     public onCollisionEnter(other: GameObject): void {
-        
+        super.onCollisionEnter(other);
     }
 }

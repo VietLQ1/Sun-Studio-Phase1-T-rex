@@ -2,6 +2,7 @@ import { AnimatedObject } from "../../../engine/game-object/AnimatedObject";
 import { GameObject } from "../../../engine/game-object/GameObject";
 import { Input } from "../../../engine/input/Input";
 import { ScoreManager } from "../../../engine/manager/ScoreManager";
+import { GameManager } from "../../manager/GameManager";
 
 export abstract class Obstacle extends AnimatedObject {
     protected _speed: number;
@@ -20,5 +21,13 @@ export abstract class Obstacle extends AnimatedObject {
         super.render();
     }
     public onCollisionEnter(other: GameObject): void {
+        if(GameManager.getInstance().isGameOver)
+        {
+            this._speed = 0;
+            return;
+        }
+        if (other.tag == 'player') {
+            this._speed = 0;
+        }
     }
 }

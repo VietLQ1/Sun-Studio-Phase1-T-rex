@@ -8,6 +8,7 @@ import { AudioManager } from '../../engine/manager/AudioManager';
 import { RigidBody } from '../../engine/components/Rigidbody';
 import { SceneManager } from '../../engine/scene/SceneManager';
 import { AnimatedObject } from '../../engine/game-object/AnimatedObject';
+import { GameManager } from '../manager/GameManager';
 export class Player extends AnimatedObject {
 
     private _isDuck = false;
@@ -79,9 +80,13 @@ export class Player extends AnimatedObject {
         super.render();
     }
     public onCollisionEnter(other: GameObject): void {
-        this._animator.setState(new CollidedState());
+        if (GameManager.getInstance().isGameOver)
+        {
+            return;
+        }
         if (other.tag == 'obstacle')
         {
+            this._animator.setState(new CollidedState());
             AudioManager.getInstance().getAudioClip('collide')?.play();
             this._alive = false;    
             if(this._isDuck)

@@ -3,6 +3,7 @@ export class GameManager {
     private _isMobile: boolean;
     private _menuText: string;
     private _gameOverText: string;
+    private _isGameOver: boolean;
     private constructor() {
         window.navigator.userAgent.match(/Mobile/) || window.navigator.userAgent.match(/Tablet/) ? this._isMobile = true : this._isMobile = false;
         this._menuText = "Press Button to Start";
@@ -30,6 +31,12 @@ export class GameManager {
     }
     public get gameOverText() {
         return this._gameOverText;
+    }
+    public get isGameOver() {
+        return this._isGameOver;
+    }
+    public set isGameOver(value: boolean) {
+        this._isGameOver = value;
     }
 }
 

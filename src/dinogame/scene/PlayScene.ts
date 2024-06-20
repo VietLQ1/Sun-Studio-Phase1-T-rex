@@ -11,11 +11,13 @@ import { HighBird } from "../game-object/obstacle-object/HighBird";
 import { BigCactus } from "../game-object/obstacle-object/BigCactus";
 import { Text } from "../../engine/user-interface/Text";
 import { AudioManager } from "../../engine/manager/AudioManager";
+import { GameManager } from "../manager/GameManager";
 
 export class PlayScene extends Scene
 {
     protected _delay: number;
     public onSceneLoad(): void {
+        GameManager.getInstance().isGameOver = false;
         this._delay = 0;
         ScoreManager.getInstance().resetScore();
         this.addGameObject(new Player())
@@ -27,6 +29,7 @@ export class PlayScene extends Scene
         
     }
     public onSceneUnload(): void {
+        GameManager.getInstance().isGameOver = true;
         this._gameObjects = [];
         this._uiObjects = [];
     }

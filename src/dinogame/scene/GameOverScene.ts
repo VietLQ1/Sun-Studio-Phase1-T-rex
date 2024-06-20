@@ -11,6 +11,7 @@ export class GameOverScene extends Scene {
     public onSceneLoad(): void {
         this._delay = 0;
         this.addGameObject(SceneManager.getInstance().currentScene.gameObjects[0]);
+        this.addGameObject(SceneManager.getInstance().currentScene.gameObjects[2]);
         this.addUIObject(new Text( window.innerWidth/2, 50, 'Your Score: ' + Math.floor(ScoreManager.getInstance().score),
         'center','middle',true, 50, 'Arial', 'black'));
         this.addUIObject(new Text( window.innerWidth/2, 100, 'High Score: ' + Math.floor(ScoreManager.getInstance().highScore),
