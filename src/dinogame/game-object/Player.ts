@@ -23,6 +23,7 @@ export class Player extends AnimatedObject {
         this.position[1] = window.innerHeight - this._height;
         AudioManager.getInstance().addAudioClip('jump', 'assets/audios/jump.wav');
         AudioManager.getInstance().addAudioClip('collide', 'assets/audios/collide.wav');
+        AudioManager.getInstance().addAudioClip('duck', 'assets/audios/duck.wav');
         this._animator.setState(new NormalState());
         this.collider = new Collider(this.position[0], this.position[1], this._width , this._height);
         this._animator.addSprite(new SpriteRenderer('assets/images/seiba_walking_0.png'));
@@ -47,6 +48,10 @@ export class Player extends AnimatedObject {
         }
         if ((input.isKeyPressed('KeyS') || input.isKeyPressed('ArrowDown') 
             || (touch && touch.x < window.innerWidth / 2 && input.getTouchEnd() == null)) && this._rigidbody.isGrounded) {
+            if(!this._isDuck)
+            {
+                AudioManager.getInstance().getAudioClip('duck')?.play();
+            }
             this._isDuck = true;
             this._height = 100 * window.innerHeight / 1080;
             this.position[1] = window.innerHeight - this._height;
