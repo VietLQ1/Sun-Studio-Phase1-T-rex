@@ -4,7 +4,7 @@ import { Button } from "./Button";
 export class SpriteButton extends Button{
     private _sprite: SpriteRenderer;
     public constructor(x: number, y: number, width: number, height: number, sprite: SpriteRenderer, text: string = ''
-        , isBold: boolean = false, fontSize: number = 0, font: string = 'Arial', color: string = 'black', backgroundColor: string = 'white')
+        , isBold: boolean = false, fontSize: number = 0, font: string = 'Arial', color: string = 'black', backgroundColor: string = 'transparent')
     {
         super(x, y, width, height, text, isBold, fontSize, font, color, backgroundColor);
         this._sprite = sprite;

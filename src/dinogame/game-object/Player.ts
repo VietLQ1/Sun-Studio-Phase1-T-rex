@@ -71,7 +71,7 @@ export class Player extends AnimatedObject {
             this.position[1] = window.innerHeight - this._height;
             this._isDuck = false;
         }
-        this.collider.x = this.position[0];
+        //this.collider.x = this.position[0];
         this.collider.y = this.position[1];
         this.collider.height = this._height;
         super.update(deltaTime, input);

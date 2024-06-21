@@ -5,7 +5,7 @@ import { UIObject } from "./UIObject";
 
 export class Button extends UIObject
 {
-    private _backgroundColor: string;
+    protected _backgroundColor: string;
     public constructor(x: number, y: number, width: number, height: number, text: string
         , isBold: boolean, fontSize: number, font: string, color: string, backgroundColor: string)
     {

@@ -4,6 +4,7 @@ import { Scene } from "../../engine/scene/Scene";
 import { StartButton } from "../user-interface/StartButton";
 import { Text } from "../../engine/user-interface/Text";
 import { ScoreManager } from "../../engine/manager/ScoreManager";
+import { SettingButton } from "../user-interface/SettingButton";
 
 export class MenuScene extends Scene
 {
@@ -13,6 +14,7 @@ export class MenuScene extends Scene
         this.addUIObject(new StartButton());
         this.addUIObject(new Text(window.innerWidth/2, window.innerHeight/2 - 100, 'Record: ' + Math.floor(ScoreManager.getInstance().highScore), 
         'center', 'middle', true, 50, 'Arial', 'black'));
+        this.addUIObject(new SettingButton());
     }
     public onSceneUnload(): void {
         this._gameObjects = [];

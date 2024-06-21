@@ -49,5 +49,8 @@ export class AudioManager {
             clip.unmute();
         }
     }
+    public get volume() {
+        return this._volume;
+    }
 
 }
