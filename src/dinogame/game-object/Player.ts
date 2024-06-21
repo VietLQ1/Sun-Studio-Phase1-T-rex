@@ -26,7 +26,7 @@ export class Player extends AnimatedObject {
         AudioManager.getInstance().addAudioClip('collide', 'assets/audios/collide.wav');
         AudioManager.getInstance().addAudioClip('duck', 'assets/audios/duck.wav');
         this._animator.setState(new NormalState());
-        this.collider = new Collider(this.position[0], this.position[1], this._width , this._height);
+        this.collider = new Collider(this.position[0] + 40 * window.innerHeight/1080, this.position[1], this._width - 40 * window.innerHeight/1080 , this._height);
         this._animator.addSprite(new SpriteRenderer('assets/images/seiba_walking_0.png'));
         this._animator.addSprite(new SpriteRenderer('assets/images/seiba_walking_1.png'));
         this._animator.addSprite(new SpriteRenderer('assets/images/seiba_walking_2.png'));
@@ -78,6 +78,14 @@ export class Player extends AnimatedObject {
     }
     public render() {
         super.render();
+        // let canvas = document.querySelector('canvas') as HTMLCanvasElement;
+        // let context = canvas.getContext('2d');
+        // if (context == null) {
+        //     console.error('2D context is null');
+        //     return;
+        // }
+        // context.fillStyle = 'red';
+        // context.fillRect(this.position[0] + 30 * window.innerHeight/1080, this.position[1], this._width - 50 * window.innerHeight/1080, this._height);
     }
     public onCollisionEnter(other: GameObject): void {
         if (GameManager.getInstance().isGameOver)

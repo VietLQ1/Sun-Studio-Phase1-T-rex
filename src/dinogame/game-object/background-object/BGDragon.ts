@@ -8,7 +8,7 @@ export class BGDragon extends BGObject
     constructor()
     {
         super();
-        this._speed = 5000 + Math.random() * 3000;
+        this._speed = 1000 + Math.random() * 300;
         this._width = 100 * window.innerHeight / 1080;
         this._height = 100 * window.innerHeight / 1080;
         this.position[1] = 2 * this._height * window.innerHeight / 1080;
