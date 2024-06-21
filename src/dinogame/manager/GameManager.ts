@@ -4,6 +4,7 @@ export class GameManager {
     private _menuText: string;
     private _gameOverText: string;
     private _isGameOver: boolean;
+    private _isPaused: boolean;
     private constructor() {
         window.navigator.userAgent.match(/Mobile/) || window.navigator.userAgent.match(/Tablet/) ? this._isMobile = true : this._isMobile = false;
         this._menuText = "Press Button to Start";
@@ -37,6 +38,12 @@ export class GameManager {
     }
     public set isGameOver(value: boolean) {
         this._isGameOver = value;
+    }
+    public get isPaused() {
+        return this._isPaused;
+    }
+    public set isPaused(value: boolean) {
+        this._isPaused = value;
     }
 }
 
