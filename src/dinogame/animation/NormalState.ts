@@ -1,12 +1,6 @@
 import { State } from '../../engine/components/State';
 import { SpriteRenderer } from '../../engine/components/SpriteRenderer';
-export class NormalState implements State {
-    private _sprites : SpriteRenderer[];
-    private _currentSprite : number;
-    constructor() {
-        this._sprites = [];
-        this._currentSprite = 0;
-    }
+export class NormalState extends State {
     public update(frame: number) {
         if (frame % 10 == 0) {
             this._currentSprite++;
@@ -15,11 +9,5 @@ export class NormalState implements State {
             }
         }
         //console.log(this._currentSprite);
-    }
-    public render(x: number, y: number, width: number, height: number) {
-        this._sprites[this._currentSprite].render(x, y, width, height);
-    }
-    public addSprite(sprite : SpriteRenderer) {
-        this._sprites.push(sprite);
     }
 }

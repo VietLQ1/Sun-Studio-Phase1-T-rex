@@ -95,6 +95,7 @@ export class Player extends AnimatedObject {
         if (other.tag == 'obstacle')
         {
             this._animator.setState(new CollidedState());
+            this._animator.addSprite(new SpriteRenderer('assets/images/seiba_hurt.png'));
             AudioManager.getInstance().getAudioClip('collide')?.play();
             this._alive = false;    
             if(this._isDuck)
