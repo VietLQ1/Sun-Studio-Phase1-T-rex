@@ -13,4 +13,7 @@ export abstract class State implements Engine.IState {
     public addSprite(sprite: SpriteRenderer): void {
         this._sprites.push(sprite);
     }
+    public get currentSprite(): SpriteRenderer {
+        return this._sprites[this._currentSprite];
+    }
 }

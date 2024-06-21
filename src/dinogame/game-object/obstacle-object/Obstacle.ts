@@ -2,6 +2,7 @@ import { AnimatedObject } from "../../../engine/game-object/AnimatedObject";
 import { GameObject } from "../../../engine/game-object/GameObject";
 import { Input } from "../../../engine/input/Input";
 import { ScoreManager } from "../../../engine/manager/ScoreManager";
+import { CollidedState } from "../../animation/CollidedState";
 import { GameManager } from "../../manager/GameManager";
 
 export abstract class Obstacle extends AnimatedObject {
@@ -23,6 +24,9 @@ export abstract class Obstacle extends AnimatedObject {
     public onCollisionEnter(other: GameObject): void {
         if(GameManager.getInstance().isGameOver)
         {
+            let collideState = new CollidedState();
+            collideState.addSprite(this._animator.currentState.currentSprite);
+            this._animator.setState(collideState);
             this._speed = 0;
             return;
         }

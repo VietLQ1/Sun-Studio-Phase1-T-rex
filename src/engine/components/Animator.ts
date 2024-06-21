@@ -19,4 +19,7 @@ export class Animator {
     public addSprite(sprite: SpriteRenderer) {
         this._currentState.addSprite(sprite);
     }
+    public get currentState(): State {
+        return this._currentState;
+    }
 }
