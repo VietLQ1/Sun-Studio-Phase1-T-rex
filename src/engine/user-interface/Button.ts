@@ -5,16 +5,12 @@ import { UIObject } from "./UIObject";
 
 export class Button extends UIObject
 {
-    private _x: number;
-    private _y: number;
     private _backgroundColor: string;
     public constructor(x: number, y: number, width: number, height: number, text: string
         , isBold: boolean, fontSize: number, font: string, color: string, backgroundColor: string)
     {
         super(x, y);
         this.collider = new Collider(this.position[0], this.position[1], 0, 0);
-        this._x = x;
-        this._y = y;
         this._width = width
         this._height = height
         this._text = text;

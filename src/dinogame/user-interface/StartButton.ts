@@ -13,7 +13,7 @@ export class StartButton extends Button
     }
     public update(deltaTime: number, input: Input): void {
         super.update(deltaTime, input);
-        input.clearTouch();
+        //input.clearTouch();
     }
     public render(): void {
         super.render();
