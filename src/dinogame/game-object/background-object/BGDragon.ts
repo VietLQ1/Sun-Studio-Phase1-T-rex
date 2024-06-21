@@ -11,6 +11,7 @@ export class BGDragon extends BGObject
         this._speed = 1000 + Math.random() * 300;
         this._width = 100 * window.innerHeight / 1080;
         this._height = 100 * window.innerHeight / 1080;
+        this.position[0] = -this._width - Math.random() * 1000;
         this.position[1] = 2 * this._height * window.innerHeight / 1080;
         this._animator.addSprite(new SpriteRenderer('assets/images/dragon_0.png'));
         this._animator.addSprite(new SpriteRenderer('assets/images/dragon_1.png'));

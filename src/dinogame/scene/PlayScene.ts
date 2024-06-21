@@ -32,6 +32,7 @@ export class PlayScene extends Scene
         this._groundBirdPool = new GameObjectPool(() => new GroundBird());
     }
     public onSceneLoad(): void {
+        this._renderer.startBGLoop();
         GameManager.getInstance().isGameOver = false;
         this._delay = 0;
         ScoreManager.getInstance().resetScore();
@@ -45,6 +46,7 @@ export class PlayScene extends Scene
         
     }
     public onSceneUnload(): void {
+        this._renderer.stopBGLoop();
         GameManager.getInstance().isGameOver = true;
         this._gameObjects = [];
         this._uiObjects = [];
