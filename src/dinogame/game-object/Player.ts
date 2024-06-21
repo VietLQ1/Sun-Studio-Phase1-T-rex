@@ -76,17 +76,7 @@ export class Player extends AnimatedObject {
         this.collider.height = this._height;
         super.update(deltaTime, input);
     }
-    public render() {
-        super.render();
-        // let canvas = document.querySelector('canvas') as HTMLCanvasElement;
-        // let context = canvas.getContext('2d');
-        // if (context == null) {
-        //     console.error('2D context is null');
-        //     return;
-        // }
-        // context.fillStyle = 'red';
-        // context.fillRect(this.position[0] + 30 * window.innerHeight/1080, this.position[1], this._width - 50 * window.innerHeight/1080, this._height);
-    }
+    
     public onCollisionEnter(other: GameObject): void {
         if (GameManager.getInstance().isGameOver)
         {

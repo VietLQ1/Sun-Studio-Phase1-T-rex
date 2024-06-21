@@ -41,8 +41,7 @@ export class Game {
         const deltaTime = (currentTime - this.lastFrameTime) / 1000;
         this.lastFrameTime = currentTime;
         let currentScene = SceneManager.getInstance().currentScene;
-        currentScene.update(deltaTime, this.input);
-        CollisionManager.getInstance().checkCollisions(currentScene);
+        currentScene.update(deltaTime, this.input); //Solid
         this.renderer.render(currentScene);
         requestAnimationFrame((timestamp) => this.gameLoop(timestamp));
     }

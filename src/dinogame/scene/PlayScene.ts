@@ -14,6 +14,7 @@ import { AudioManager } from "../../engine/manager/AudioManager";
 import { GameManager } from "../manager/GameManager";
 import { GameObjectPool } from "../../engine/object-pool/ObjectPool";
 import { Renderer } from "../../engine/components/Renderer";
+import { CollisionManager } from "../../engine/manager/CollisionManager";
 
 export class PlayScene extends Scene
 {
@@ -117,6 +118,7 @@ export class PlayScene extends Scene
                 this._uiObjects[0].stopBlink();
             }
         }
+        CollisionManager.getInstance().checkCollisions(this);
     }
     public render(): void {
         super.render();

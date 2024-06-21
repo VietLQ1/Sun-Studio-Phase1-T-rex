@@ -2,6 +2,8 @@ import { GameObject } from "../game-object/GameObject";
 import { Input } from "../input/Input";
 import { Renderer } from "../components/Renderer";
 import { UIObject } from "../user-interface/UIObject";
+import { SceneManager } from "./SceneManager";
+import { CollisionManager } from "../manager/CollisionManager";
 
 export abstract class Scene {
     protected _canvas: HTMLCanvasElement;
@@ -33,7 +35,6 @@ export abstract class Scene {
             }
             
         }
-    
     }
     public render(): void
     {

@@ -4,6 +4,7 @@ import { GameObject } from "./GameObject";
 
 export class SpriteObject extends GameObject
 {
+    public spriteRenderer: SpriteRenderer;//spriteObject
     constructor(spritePath: string)
     {
         super();

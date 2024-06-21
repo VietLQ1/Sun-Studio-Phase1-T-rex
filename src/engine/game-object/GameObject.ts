@@ -7,10 +7,9 @@ export abstract class GameObject implements Engine.IGameObject {
     public rotation: [number, number, number];
     public scale: [number, number, number];
     protected _tag: string;
-    protected _width: number;
-    protected _height: number;
-    public collider: Collider;
-    public spriteRenderer: SpriteRenderer;
+    protected _width: number;//interface
+    protected _height: number;//interface
+    public collider: Collider;//sprtieObject
     protected _isEnable: boolean;
     constructor(x: number = 0, y: number = 0) {
         this.position = [x, y, 0];

@@ -41,7 +41,4 @@ export class GameOverScene extends Scene {
             input.clearTouch();
         }
     }
-    public render(): void {
-        super.render();
-    }
 }
